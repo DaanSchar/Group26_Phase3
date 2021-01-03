@@ -6,6 +6,6 @@ package graph;
 
 public class ColEdge
 {
-    int u;
-    int v;
+    public int u;
+    public int v;
 }
