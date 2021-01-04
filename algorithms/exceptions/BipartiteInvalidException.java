@@ -1,10 +1,10 @@
-package algorithms;
+package algorithms.exceptions;
 
 public class BipartiteInvalidException extends Exception
 {
     public BipartiteInvalidException()
     {
-        super("Bipartite:  Cannot give vertex appropriate color");
+        super("Bipartite:      Cannot give vertex appropriate color");
     }
 
     public BipartiteInvalidException(String message)

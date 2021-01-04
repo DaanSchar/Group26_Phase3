@@ -15,7 +15,7 @@ public class IsolatedVertex
     public static boolean hasIsolated()
     {
 
-        System.out.println("Running IsolatedVertex...");
+        System.out.println("IsolatedVertex: Running...");
 
         n = Graph.getN();
         m = Graph.getM();
@@ -40,17 +40,18 @@ public class IsolatedVertex
             }
         }
 
-        System.out.println("Finished running IsolatedVertex");
-
         for(int i = 0; i < n; i++)
         {
             if(vertices[i] != 0)
             {
-                System.out.println("Graph contains Isolated vertices!");
+                System.out.println("IsolatedVertex: Graph contains Isolated vertices!");
+                System.out.println("IsolatedVertex: Finished running");
                 return true;
             }
         }
-        System.out.println("Graph does not contain Isolated vertices");
+        System.out.println("IsolatedVertex: Graph does not contain Isolated vertices");
+        System.out.println("IsolatedVertex: Finished running");
         return false;
     }
+
 }
