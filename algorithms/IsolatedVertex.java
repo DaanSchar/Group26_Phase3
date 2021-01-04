@@ -45,6 +45,7 @@ public class IsolatedVertex
             if(vertices[i] != 0)
             {
                 System.out.println("IsolatedVertex: Graph contains Isolated vertices!");
+                System.out.println("IsolatedVertex: vertex: " + i);
                 System.out.println("IsolatedVertex: Finished running");
                 return true;
             }

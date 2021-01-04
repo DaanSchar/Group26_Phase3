@@ -1,6 +1,3 @@
-import algorithms.Bipartite;
-import algorithms.ColoringExample;
-import algorithms.IsolatedVertex;
 import graph.ConnectedVertices;
 import graph.Graph;
 
@@ -15,7 +12,6 @@ public class Main
         Graph.read(args[0]);
         ConnectedVertices.makeMatrix();
 
-        IsolatedVertex.hasIsolated();
-        Bipartite.run();
+        // run your algorithm here
     }
 }

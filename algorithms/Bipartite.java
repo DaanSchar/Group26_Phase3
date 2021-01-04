@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class Bipartite
 {
 
-    private static boolean DEBUG = false;
+    private static boolean DEBUG = true;
 
     private static int n;
     private static int m;
@@ -40,7 +40,7 @@ public class Bipartite
 
         try
         {
-            for(int startVertex = 1; startVertex < n+1; startVertex++)
+            for(int startVertex = 1; startVertex < 2; startVertex++) //n+ 1
             {
                 color = new Color(n);
                 color.setColor(startVertex, 1);
@@ -55,6 +55,21 @@ public class Bipartite
                         giveColor(vertices[i]);
                     }
                 }
+
+                int count = 0;
+
+                for(int i = 0; i < n; i++)
+                {
+                    if(color.getColor(i+1) != 0)
+                    {
+                        count++;
+                    }
+                }
+                if( count == n)
+                {
+                    color.printColorList();
+                }
+
             }
 
             color.printColorList();
