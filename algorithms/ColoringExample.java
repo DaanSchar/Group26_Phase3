@@ -16,7 +16,7 @@ public class ColoringExample
     public static void run()
     {
 
-        System.out.println("Running Coloring Example.");
+        System.out.println("Running Coloring Example...");
 
         n = Graph.getN();
         m = Graph.getM();

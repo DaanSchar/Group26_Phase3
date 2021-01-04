@@ -1,3 +1,4 @@
+import algorithms.Bipartite;
 import algorithms.ColoringExample;
 import graph.ConnectedVertices;
 import graph.Graph;
@@ -14,6 +15,6 @@ public class Main
         ConnectedVertices.makeMatrix();
 
         // example algorithm for coloring a graph
-        ColoringExample.run();
+        Bipartite.run();
     }
 }
