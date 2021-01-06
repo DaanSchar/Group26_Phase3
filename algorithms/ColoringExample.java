@@ -6,8 +6,6 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
-import java.util.Arrays;
-
 public class ColoringExample
 {
     private static int n;
@@ -40,10 +38,10 @@ public class ColoringExample
             giveColor(path[i]);
         }
 
-        System.out.println(color.getLargestColor());
+        System.out.println(color.chromNum());
 
         System.out.println("ColoringExample:Finished Running");
-        Log.endTimer("ColoringExample", color.getLargestColor());
+        Log.endTimer("ColoringExample", color.chromNum());
 
     }
 

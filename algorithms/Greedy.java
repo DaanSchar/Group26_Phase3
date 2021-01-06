@@ -32,7 +32,7 @@ public class Greedy {
         System.out.println(Arrays.toString(ConnectedVertices.get(2)));
 
         System.out.println(Check.isCorrect(color));
-        System.out.println(color.getLargestColor());
+        System.out.println(color.chromNum());
     }
 
     private static void giveColor(int vertex)

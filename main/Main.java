@@ -28,6 +28,7 @@ public class Main
         //IsolatedVertex.run();
         //System.out.println(Arrays.toString(IsolatedVertex.get()));
         Greedy.run();
+        DSatur.run();
 
         //this is a test
 
