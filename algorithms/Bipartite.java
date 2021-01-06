@@ -5,6 +5,7 @@ import color.Color;
 import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
+import logging.Log;
 
 import java.util.Arrays;
 
@@ -18,7 +19,7 @@ import java.util.Arrays;
 public class Bipartite
 {
 
-    private static boolean DEBUG = true;
+    private static boolean DEBUG = false;
 
     private static int n;
     private static int m;
@@ -29,7 +30,7 @@ public class Bipartite
 
     public static void run()
     {
-
+        Log.startTimer();
         System.out.println("Bipartite:      Running...");
 
         n = Graph.getN();
@@ -40,7 +41,7 @@ public class Bipartite
 
         try
         {
-            for(int startVertex = 1; startVertex < 2; startVertex++) //n+ 1
+            for(int startVertex = 1; startVertex < n + 1; startVertex++) //n+ 1
             {
                 color = new Color(n);
                 color.setColor(startVertex, 1);
@@ -56,31 +57,28 @@ public class Bipartite
                     }
                 }
 
-                int count = 0;
-
-                for(int i = 0; i < n; i++)
+                if(Check.isCorrect(Bipartite.getColor()))
                 {
-                    if(color.getColor(i+1) != 0)
-                    {
-                        count++;
-                    }
-                }
-                if( count == n)
-                {
-                    color.printColorList();
+                    isBipartite = true;
+                    System.out.println("Bipartite:      isCorrect: " + Check.isCorrect(Bipartite.getColor()));
+                    System.out.println("Bipartite:      Graph is Bipartite.");
+                    System.out.println("Bipartite:      Finished running.");
+                    Log.endTimer("Bipartite", true);
+                    return;
                 }
 
             }
-
-            color.printColorList();
 
         }
         catch (BipartiteInvalidException e)
         {
             isBipartite = false;
-            System.out.println(e.getMessage());
         }
+
+        isBipartite = false;
+        System.out.println("Bipartite:      Graph cannot be colored with 2 colors");
         System.out.println("Bipartite:      Finished running.");
+        Log.endTimer("Bipartite", false);
     }
 
     /**
@@ -128,5 +126,10 @@ public class Bipartite
     public static boolean isBipartite()
     {
         return isBipartite;
+    }
+
+    public static Color getColor()
+    {
+        return color;
     }
 }

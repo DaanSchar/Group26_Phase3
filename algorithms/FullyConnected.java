@@ -3,9 +3,9 @@ package algorithms;
 import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
+import logging.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 
 /**
@@ -23,7 +23,8 @@ public class FullyConnected
 
     public static void run()
     {
-        System.out.println("FullyConnected:     Running...");
+        Log.startTimer();
+        System.out.println("FullyConnected: Running...");
         n = Graph.getN();
         m = Graph.getM();
         e = Graph.getE();
@@ -65,14 +66,16 @@ public class FullyConnected
             if(!isSeen[i])
             {
                 fullyConnected = false;
-                System.out.println("FullyConnected:     Graph contains subGraphs that are not connected to each other");
-                System.out.println("FullyConnected:     Finished Running.");
+                System.out.println("FullyConnected: Graph contains subGraphs that are not connected to each other");
+                System.out.println("FullyConnected: Finished Running.");
+                Log.endTimer("FullyConnected", false);
                 return;
             }
         }
-        System.out.println("FullyConnected:     Graph if fully connected.");
-        System.out.println("FullyConnected:     Finished Running.");
+        System.out.println("FullyConnected: Graph if fully connected.");
+        System.out.println("FullyConnected: Finished Running.");
         fullyConnected = true;
+        Log.endTimer("FullyConnected", true);
     }
 
 

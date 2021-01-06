@@ -2,7 +2,9 @@ package algorithms;
 
 import color.Color;
 import graph.ColEdge;
+import graph.ConnectedVertices;
 import graph.Graph;
+import logging.Log;
 
 import java.util.Arrays;
 
@@ -16,7 +18,8 @@ public class ColoringExample
     public static void run()
     {
 
-        System.out.println("Running Coloring Example...");
+        Log.startTimer();
+        System.out.println("ColoringExample:Running...");
 
         n = Graph.getN();
         m = Graph.getM();
@@ -24,16 +27,41 @@ public class ColoringExample
 
         color = new Color(n);
 
+
+        int[] path = new int[n];
+
         for(int i = 0; i < n; i++)
         {
-            color.setColor(i + 1, i + 1);
+            path[i] = i+1;
         }
 
-        System.out.println("Finished running Coloring Example.");
+        for(int i = 0; i < n; i++)
+        {
+            giveColor(path[i]);
+        }
 
-        color.printColorList();
+        System.out.println(color.getLargestColor());
+
+        System.out.println("ColoringExample:Finished Running");
+        Log.endTimer("ColoringExample", color.getLargestColor());
 
     }
 
+    private static void giveColor(int vertex)
+    {
+        int[] vertices = ConnectedVertices.get(vertex);
 
+        int max = 0;
+
+        for(int i = 0; i < vertices.length; i++)
+        {
+            if(color.getColor(vertices[i]) > max)
+            {
+                max = color.getColor(vertices[i]);
+            }
+        }
+
+        color.setColor(vertex, (max + 1));
+
+    }
 }

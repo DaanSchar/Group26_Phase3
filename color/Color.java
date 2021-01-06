@@ -18,6 +18,25 @@ public class Color
 
 
 
+    /**
+     * returns the largest color in the color object
+     */
+    public int getLargestColor()
+    {
+
+        int max = colorList[0];
+
+        for(int i = 0; i < n; i++)
+        {
+            if(colorList[i] > max)
+            {
+                max = colorList[i];
+            }
+        }
+        return max;
+    }
+
+
     public void setColor(int vertex, int color)
     {
         colorList[vertex-1] = color;

@@ -3,6 +3,8 @@ package algorithms;
 import graph.ColEdge;
 import graph.Graph;
 
+import java.util.ArrayList;
+
 /**
  * class that checks whether a graph contains vertices that don't contain any edges.
  */
@@ -11,8 +13,10 @@ public class IsolatedVertex
     private static int n;
     private static int m;
     private static ColEdge[] e;
+    private static boolean hasIsolated;
+    private static ArrayList isolatedVertices;
 
-    public static boolean hasIsolated()
+    public static void run()
     {
 
         System.out.println("IsolatedVertex: Running...");
@@ -21,7 +25,8 @@ public class IsolatedVertex
         m = Graph.getM();
         e = Graph.getE();
 
-
+        hasIsolated = false;
+        isolatedVertices = new ArrayList();
         int[] vertices = new int[n];
 
         for(int i = 0; i < n; i++)
@@ -40,19 +45,44 @@ public class IsolatedVertex
             }
         }
 
+
         for(int i = 0; i < n; i++)
         {
             if(vertices[i] != 0)
             {
-                System.out.println("IsolatedVertex: Graph contains Isolated vertices!");
-                System.out.println("IsolatedVertex: vertex: " + i);
-                System.out.println("IsolatedVertex: Finished running");
-                return true;
+                System.out.println("IsolatedVertex: Graph contains Isolated vertices:   " + (i+1));
+                isolatedVertices.add((i+1));
+                hasIsolated = true;
             }
         }
-        System.out.println("IsolatedVertex: Graph does not contain Isolated vertices");
+
+        if(!hasIsolated) {
+            System.out.println("IsolatedVertex: Graph does not contain Isolated vertices");
+        }
+
         System.out.println("IsolatedVertex: Finished running");
-        return false;
+    }
+
+
+    public static boolean hasIsolated()
+    {
+        return hasIsolated;
+    }
+
+
+    /**
+     * returns the isolated vertices as an array
+     */
+    public static int[] get()
+    {
+
+        int[] temp = new int[isolatedVertices.size()];
+
+        for(int i = 0; i < isolatedVertices.size(); i++)
+        {
+            temp[i] = (int)isolatedVertices.get(i);
+        }
+        return temp;
     }
 
 }
