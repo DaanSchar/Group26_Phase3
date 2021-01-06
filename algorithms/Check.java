@@ -1,3 +1,4 @@
+
 package algorithms;
 
 import color.Color;
@@ -26,7 +27,6 @@ public class Check
         {
             if(color.getColor(e[i].u) == color.getColor(e[i].v))
             {
-                System.out.println(e[i].u + ": " + color.getColor(e[i].u) + "\n" + e[i].v + ": " + color.getColor(e[i].v) );
                 return false;
             }
         }

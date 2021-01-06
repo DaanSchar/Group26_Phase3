@@ -21,12 +21,9 @@ public class Main
         ConnectedVertices.makeMatrix();
 
     // run your algorithm here
-        //FullyConnected.run();
-        //IsolatedVertex.hasIsolated();
-        //Bipartite.run();
-        //ColoringExample.run();
-        //IsolatedVertex.run();
-        //System.out.println(Arrays.toString(IsolatedVertex.get()));
+        FullyConnected.run();
+        Bipartite.run();
+        IsolatedVertex.run();
         Greedy.run();
         DSatur.run();
 

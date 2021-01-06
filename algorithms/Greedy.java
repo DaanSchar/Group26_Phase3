@@ -5,7 +5,6 @@ import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
 
-import java.util.Arrays;
 
 public class Greedy {
 
@@ -27,30 +26,20 @@ public class Greedy {
             giveColor(i);
         }
 
-
-        color.printColorList();
-        System.out.println(Arrays.toString(ConnectedVertices.get(2)));
-
-        System.out.println(Check.isCorrect(color));
-        System.out.println(color.chromNum());
+        System.out.println("Greedy:         Chromatic number: " + color.chromNum());
     }
 
     private static void giveColor(int vertex)
     {
         int[] vertices = ConnectedVertices.get(vertex);
 
-        int clr = 1;
-
         for (int i = 0; i < vertices.length; i++)
         {
-            if(clr == color.getColor(vertices[i]))
+            if(color.getColor(vertex) <= color.getColor(vertices[i]))
             {
-                clr++;
-                i = 0;
+                color.setColor(vertex, color.getColor(vertices[i]) + 1);
             }
-            System.out.println(clr);
         }
-        color.setColor(vertex,clr);
     }
 
 }

@@ -4,6 +4,7 @@ import color.Color;
 import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
+import logging.Log;
 
 /**
  * ordered coloring of vertices with the lowest possible color
@@ -46,14 +47,11 @@ public class DSatur {
     public static void run()
     {
         starttime = System.currentTimeMillis();
-        System.out.println("Running DSatur...");
+        System.out.println("DSatur:         Running DSatur...");
 
         n = Graph.getN();
         m = Graph.getM();
         e = Graph.getE();
-
-        System.out.println(n);
-        System.out.println(m);
 
         degreeSort();
         firstColoring();
@@ -234,9 +232,10 @@ public class DSatur {
         runtime = System.currentTimeMillis() - starttime;
 
         int result = color.chromNum();
-        System.out.println(result + " colors have been used.");
+        System.out.println("DSatur:         " + result + " colors have been used" );
+        System.out.println("DSatur:         Finished running DSatur");
+        Log.endTimer("DSatur", result);
 
-        System.out.println("runtime: " + runtime);
 
 
         //color.printColorList();

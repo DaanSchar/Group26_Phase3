@@ -66,9 +66,7 @@ public class Bipartite
                     Log.endTimer("Bipartite", true);
                     return;
                 }
-
             }
-
         }
         catch (BipartiteInvalidException e)
         {
