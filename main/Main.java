@@ -29,6 +29,8 @@ public class Main
         //System.out.println(Arrays.toString(IsolatedVertex.get()));
         Greedy.run();
 
+        //this is a test
+
 
         Log.close();
     }
