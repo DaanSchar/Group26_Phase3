@@ -21,11 +21,12 @@ public class Main
         ConnectedVertices.makeMatrix();
 
     // run your algorithm here
-        FullyConnected.run();
-        Bipartite.run();
-        IsolatedVertex.run();
-        Greedy.run();
-        DSatur.run();
+        //FullyConnected.run();
+        //Bipartite.run();
+        //IsolatedVertex.run();
+        //Greedy.run(Graph.getN());
+        //DSatur.run();
+        BackTracking.run();
 
         //this is a test
 

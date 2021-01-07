@@ -1,19 +1,7 @@
-1#
+46#
 
 Graph:  20.txt
 Total Vertices: 166
 Total Edges:    197
 
-FullyConnected
-Total time: 23
-is FullyConnected: true
-
-Bipartite
-Total time: 3636
-is Bipartite: false
-
-DSatur
-Total time: 4504
-Chromatic number: 3
-
-Total run time: 8163
+Total run time: 0

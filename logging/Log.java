@@ -37,7 +37,7 @@ public class Log
             File totalRunFile = new File("logs/totalruns.txt");
             Scanner fr = new Scanner(totalRunFile);
             runNumber = fr.nextInt();
-            System.out.println(runNumber);
+            System.out.println("Log:            Run: " + (runNumber+1));
             fr.close();
 
             //tracks the amount of runs
