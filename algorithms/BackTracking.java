@@ -17,6 +17,7 @@ public class BackTracking
 
     private static int q;
     private static int l;
+    private static int k;
     private static int[] U;
     private static Color color;
 
@@ -29,7 +30,32 @@ public class BackTracking
         e = Graph.getE();
         color = new Color(n);
 
+        // setup
         q = n;
+        l = 1;
+        k = 1; // (2nd index)
+        color.setColor(1,1);
+
+        // if the set of possible colors of vertex k is empty
+        if(isEmpty(getPosCol(k)))
+        {
+            if(k == 1)
+            {
+                return;
+            } else{
+                k -= 1;
+                l = color.getColor(k);
+            }
+        } else {
+            // sets the color of vertex k to the smallest color in U(array of all assignable colors)
+
+            int smallestColor =  getMin(getPosCol(k));
+
+            color.setColor(k, smallestColor);
+        }
+
+
+
 
     }
 
@@ -69,6 +95,7 @@ public class BackTracking
         return posColArr;
     }
 
+
     private static boolean isEmpty(int[] a)
     {
         if(a.length == 0)
@@ -79,6 +106,22 @@ public class BackTracking
         }
     }
 
+    /**
+     * returns smallest value of an array
+     */
+    private static int getMin(int[] a)
+    {
+        int min = a[0];
+
+        for(int i = 0; i < a.length; i++)
+        {
+            if(a[i] < min)
+            {
+                min = a[i];
+            }
+        }
+        return min;
+    }
 
 }
 
