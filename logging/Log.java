@@ -3,153 +3,118 @@ package logging;
 import graph.Graph;
 import main.Main;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Scanner;
 
 
 /**
- * This class tracks the timer between when start() and end() get called.
- * basically, we use it to tracks the time an algorithm takes to run.
- * it also tracks some other stuff
+ * The Log class tracks everything we would like to know of the run and
+ * stores it in a .csv file
  */
 public class Log
 {
 
+    private static FileWriter fw;
+    private static BufferedWriter bw;
+    private static PrintWriter pw;
+    private static String filePath = "logs/logs.csv";
+
+    private static int runNumber;
     private static long start;
     private static long end;
-    private static File file = new File("logs/log.txt");
-    private static FileWriter fw;
-    private static FileWriter fwRun;
-    private static int runNumber;
     private static long totalTime;
 
+    //order of how the algorithms have been applied
+    private static String order;
 
-    /**
-     * initializes the timer, and creates a filewriter
-     */
     public static void init()
     {
+        FileWriter fw = null;
         try {
 
+            // reads the total run number
             File totalRunFile = new File("logs/totalruns.txt");
             Scanner fr = new Scanner(totalRunFile);
             runNumber = fr.nextInt();
             System.out.println("Log:            Run: " + (runNumber+1));
             fr.close();
 
+            fw = new FileWriter(filePath,true);
+            bw = new BufferedWriter(fw);
+            pw = new PrintWriter(bw);
+
+            // column headers
+            if(runNumber == 0)
+            {
+                pw.println("\"Run\"," + "\"Graph\"," + "\"Vertices\"," + "\"Edges\"," + "\"Total Time\"," + "\"Order\"," );
+            }
+
+            // initial source data
+            pw.print(++runNumber + "," + Main.getGraphName() + "," + Graph.getN() + "," + Graph.getM() + ",");
+
             //tracks the amount of runs
-            fwRun = new FileWriter(totalRunFile);
-            fwRun.write("" + (++runNumber));
+            FileWriter fwRun = new FileWriter(totalRunFile);
+            fwRun.write("" + (runNumber));
             fwRun.close();
 
 
-            fw = new FileWriter(file);
-            fw.write("" + runNumber + "#" + "\n\n");
-            fw.write("Graph:  " + Main.getGraphName() + "\n");
-            fw.write("Total Vertices: " + Graph.getN()+ "\n");
-            fw.write("Total Edges:    " + Graph.getM() + "\n\n");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * sets the starting time position
-     */
-    public static void startTimer()
-    {
-        start = System.currentTimeMillis();
-    }
-
-
-    /**
-     * sets the ending time position, and writes the total
-     * time to the file "timer.txt"
-     */
-    public static void endTimer(String className)
-    {
-        end = System.currentTimeMillis();
-        totalTime += (end-start);
-
-        try {
-            fw.write(className + "\nTotal time: " + (end - start) + "\n\n");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-    /**
-     * same thing, just added a boolean to log if a graph
-     * gets tests positive or negative to an algorithm
-     */
-    public static void endTimer(String className, boolean bool)
-    {
-        end = System.currentTimeMillis();
-        totalTime += (end-start);
-
-        try {
-            fw.write(className + "\nTotal time: " + (end - start) + "\n");
-            fw.write("is " + className + ": " + bool + "\n\n");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-    public static void endTimer(String className, int number)
-    {
-        end = System.currentTimeMillis();
-        totalTime += (end-start);
-
-        try {
-            fw.write(className + "\nTotal time: " + (end - start) + "\n");
-            fw.write("Chromatic number: " + number + "\n\n");
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-
-    }
-
-
-    /**
-     * closes the filewriter
-     */
-    public static void close()
-    {
-        try {
-
-            fw.write("Total run time: " + totalTime);
-
-            fw.close();
-
-            //copies all text from log.txt to a new file, it's name being the graph that has been scanned and the run number
-            File newFile = new File("logs/" +String.valueOf(runNumber) + "_graph" + Main.getGraphName());
-            FileWriter fw2 = new FileWriter(newFile);
-
-            Scanner fr = new Scanner(file);
-            while(fr.hasNextLine())
-            {
-                String string = fr.nextLine();
-                fw2.write(string+"\n");
-            }
-
-            fw2.close();
-
+            // init order string
+            order = "";
+            totalTime = 0;
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    public static void startTimer()
+    {
+        start = System.currentTimeMillis();
+    }
+
+    public static void endTimer(String name)
+    {
+        end = System.currentTimeMillis();
+        totalTime += (end-start);
+
+        order += name;
+        order += "[" + (end-start)/1000+ " s]";
+        order += ",";
+
+    }
+
+    public static void endTimer(String name, int n)
+    {
+        end = System.currentTimeMillis();
+        totalTime += (end-start);
+
+        order += name;
+        order += "[" + (end-start)/1000 + " s]";
+        order += "[chrom: " + n + "]";
+        order += ",";
+
+
+    }
+
+    public static void endTimer(String name, boolean b)
+    {
+        end = System.currentTimeMillis();
+        totalTime += (end-start);
+
+        order += name;
+        order += "[" + (end-start)/1000+ " s]";
+        order += "[is: " + b + "]";
+        order += ",";
+
+    }
+
+    public static void close()
+    {
+        System.out.println("Log:            closing");
+        pw.print(totalTime+" ms,");
+        pw.println(order);
+        pw.close();
+    }
+
+
 }

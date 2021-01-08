@@ -17,23 +17,27 @@ public class Main
     // data setup
         graphName = args[0];
         Graph.read(graphName);
-        Log.init();
         ConnectedVertices.makeMatrix();
 
-    // run your algorithm here
-        //FullyConnected.run();
-        //Bipartite.run();
-        //IsolatedVertex.run();
-        //Greedy.run(Graph.getN());
-        //DSatur.run();
-        BackTracking.run();
+        for(int i = 0; i < 10; i++)
+        {
+            runProgram();
+        }
+    }
 
-        //this is a test
 
+    public static void runProgram()
+    {
+        Log.init();
+
+        FullyConnected.run();
+        Bipartite.run();
+        IsolatedVertex.run();
+        Greedy.run(Graph.getN());
+        DSatur.run();
 
         Log.close();
     }
-
 
 
 
