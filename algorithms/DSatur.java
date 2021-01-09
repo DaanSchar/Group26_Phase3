@@ -47,6 +47,7 @@ public class DSatur {
     public static void run()
     {
         starttime = System.currentTimeMillis();
+        Log.startTimer();
         System.out.println("DSatur:         Running DSatur...");
 
         n = Graph.getN();

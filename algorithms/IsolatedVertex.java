@@ -2,6 +2,7 @@ package algorithms;
 
 import graph.ColEdge;
 import graph.Graph;
+import logging.Log;
 
 import java.util.ArrayList;
 
@@ -18,7 +19,7 @@ public class IsolatedVertex
 
     public static void run()
     {
-
+        Log.startTimer();
         System.out.println("IsolatedVertex: Running...");
 
         n = Graph.getN();
@@ -61,6 +62,7 @@ public class IsolatedVertex
         }
 
         System.out.println("IsolatedVertex: Finished running");
+        Log.endTimer("IsolatedVertex", hasIsolated);
     }
 
 
