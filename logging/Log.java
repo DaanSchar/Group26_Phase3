@@ -46,11 +46,11 @@ public class Log
             // column headers
             if(runNumber == 0)
             {
-                pw.println("\"Run\"," + "\"Graph\"," + "\"Vertices\"," + "\"Edges\"," + "\"Total Time\"," + "\"Order\"," );
+                pw.println("\"Run\"," + "\"Graph\"," + "\"Vertices\"," + "\"Edges\"," + "\"Density\"," + "\"Total Time\"," + "\"Order\"," );
             }
 
             // initial source data
-            pw.print(++runNumber + "," + Main.getGraphName() + "," + Graph.getN() + "," + Graph.getM() + ",");
+            pw.print(++runNumber + "," + Main.getGraphName() + "," + Graph.getN() + "," + Graph.getM() + "," + Graph.getD() + ",");
 
             //tracks the amount of runs
             FileWriter fwRun = new FileWriter(totalRunFile);

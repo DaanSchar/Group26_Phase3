@@ -19,7 +19,7 @@ public class Main
         Graph.read(graphName);
         ConnectedVertices.makeMatrix();
 
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 1; i++)
         {
             runProgram();
         }

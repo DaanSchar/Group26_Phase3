@@ -12,6 +12,7 @@ public class Graph
 
     private static int n;
     private static int m;
+    private static int d;
     private static ColEdge[] e;
 
 
@@ -111,6 +112,13 @@ public class Graph
                 if(DEBUG) System.out.println(COMMENT + " Warning: vertex "+x+" didn't appear in any edge : it will be considered a disconnected vertex on its own.");
             }
         }
+    }
+
+    public static double getD() {
+
+        double d = (2 * (double)m) /(double)(n * n - n);
+
+        return d;
     }
 
     public static int getN()

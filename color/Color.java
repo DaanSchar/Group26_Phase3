@@ -24,7 +24,7 @@ public class Color
     public void setColor(int vertex, int color)
     {
         colorList[vertex-1] = color;
-        //check(vertex);
+        check(vertex);
         System.out.println("coloring vertex " + vertex + " color " + color);
     }
 
