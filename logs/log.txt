@@ -1,7 +1,0 @@
-46#
-
-Graph:  20.txt
-Total Vertices: 166
-Total Edges:    197
-
-Total run time: 0

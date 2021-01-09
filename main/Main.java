@@ -26,7 +26,9 @@ public class Main
         //IsolatedVertex.run();
         //Greedy.run(Graph.getN());
         //DSatur.run();
-        BackTracking.run();
+        BackTrackingSortedDegrees.run();
+        //BackTracking.run();
+
 
         //this is a test
 

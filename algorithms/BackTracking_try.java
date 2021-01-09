@@ -1,9 +1,5 @@
 package algorithms;
 
-/**
- * basic backtracking algorithm - not properly working yet
- */
-
 import color.Color;
 import graph.ColEdge;
 import graph.ConnectedVertices;
@@ -12,7 +8,7 @@ import logging.Log;
 
 import java.util.ArrayList;
 
-public class BackTracking
+public class BackTracking_try
 {
 
     private static int n;
@@ -22,6 +18,7 @@ public class BackTracking
     private static int q;
     private static int l;
     private static int k;
+    private static int[] sortedDegrees;
     private static int[] L;
     private static ArrayList U;
     private static Color color;
@@ -30,6 +27,8 @@ public class BackTracking
     private static int round;
 
     private static long starttime;
+    private static long runtime;
+
 
 
     public static void run() {
@@ -45,24 +44,68 @@ public class BackTracking
         color = new Color(n);
 
         // setup
+        //degreeSort();
+        //color.setColor(sortedDegrees[0], 1);
+
+        color.setColorBackTracking(0, 1);
 
         q = n;
         l = 1;
         k = 1; // (2nd index)
-        L = new int[n]; //stores best solution for a vertex k in current partial solution
-        L[0] = 1; // best solution for vertex 1 so far
-
-        U = new ArrayList <ArrayList<Integer>> (n); //stores colors that are unused so far for vertex k
+        L = new int[n]; //storing number of colors for a vertex in current solution
+        L[0] = 1; // number of colors used for vertex 1
+        U = new ArrayList <ArrayList<Integer>> (n); //construct 2D ArrayList
 
         for(int i = 0; i < n; i++)
         {
-            U.add(new ArrayList<Integer> (n)); //create empty 2D ArrayList of n*n size
+            U.add(new ArrayList<Integer> (n)); //create 2D ArrayList of n*n size
         }
 
-        color.setColorBackTracking(0, 1);
-
+        //getPosColorSet(sortedDegrees[k]);
         getPosColorSet(k);
 
+    }
+
+    public static void degreeSort()
+    {
+        //make array that stores the degrees of each vertex
+        int[] degrees = new int[n];
+
+        for(int i = 1; i <= n; i++) {
+
+            for(int j = 0; j < e.length; j++) {
+
+                if(i == e[j].u) {
+
+                    degrees[i - 1] = degrees[i - 1] + 1;
+                }
+                else if(i == e[j].v) {
+
+                    degrees[i - 1] = degrees[i - 1] + 1;
+                }
+            }
+        }
+
+        //calculate maximum degree
+        int maxDegree = 0;
+
+        for(int i = 0; i < degrees.length; i++) {
+            maxDegree = Math.max(maxDegree, degrees[i]);
+        }
+
+        //make array storing vertices by decreasing order of degrees
+        sortedDegrees = new int[n];
+
+        int position = 0;
+
+        for(int i = maxDegree; i >= 0; i--) {
+            for(int j = 0; j < degrees.length; j++) {
+                if(degrees[j] == i) {
+                    sortedDegrees[position] = j + 1;
+                    position++;
+                }
+            }
+        }
     }
 
 
@@ -87,9 +130,8 @@ public class BackTracking
         }
     }
 
-
     /**
-     * computes the set of assignable colors of vertex k
+     * computes the set of assignable unused colors
      * @param k the vertex that is considered
      */
     private static void getPosColorSet(int k){
@@ -98,25 +140,20 @@ public class BackTracking
         checkPosColorSet(k);
     }
 
-
     /**
      * returns array containing the possible colors this vertex can be assigned.
-     * @param k the vertex that is considered
      */
     private static void getPosCol(int k)
     {
-        int[] vertices = ConnectedVertices.get(k+1);
+        //int[] vertices = ConnectedVertices.get(sortedDegrees[k]);
+        int[] vertices = ConnectedVertices.get(k);
         ArrayList<Integer> posCol = new ArrayList();
 
-        System.out.println("getPosCol: q = " + q);
-
         // makes an arraylist which contains all colors smaller to q
-        for(int i = 0; i < q - 1; i++)
+        for(int i = 0; i < q; i++)
         {
             posCol.add(i+1);
         }
-
-        System.out.println("possible colors of vertex " + (k+1) + ": " + posCol);
 
         // removes colors this vertex is adjacent to
         for(int i = 0; i< vertices.length; i++)
@@ -124,36 +161,29 @@ public class BackTracking
             posCol.remove((Integer.valueOf(color.getColor(vertices[i]))));
         }
 
-        System.out.println("removing own color: " + color.getColorBackTracking(k));
-        //removes color this vertex is colored with
-        posCol.remove(Integer.valueOf(color.getColorBackTracking(k)));
-
-        //eliminate L(k)
-        System.out.println("remove L(k): " + L[k]);
-        posCol.remove((Integer.valueOf(L[k])));
-
-
-        //inserts posCol into U(k) at index k
+        //inserts posCol into U(k)
         U.set(k, (ArrayList)posCol);
 
 
-        //System.out.println("k: " + (k+1));
-        //System.out.println("U: " + U.get(k));
-        System.out.println("possible colors of vertex " + (k+1) + "after removal: " + U.get(k));
+        System.out.println("k: " + (k+1));
+        System.out.println("U: " + U.get(k));
 
     }
 
     /**
-     * checks whether U(k) - the unused assignable set of colors -  is empty
+     * computes the set of assignable unused colors and
+     * checks whether the assignable set of colors is empty
      * @param k the vertex that is considered
      */
     private static void checkPosColorSet(int k) {
 
-        //get U(k) - at position k
-        ArrayList<Integer> newPosCol = (ArrayList)U.get(k);
+        //get U(k)
+        ArrayList<Integer> newPosCol;
 
-        //System.out.println("new k: " + (k+1));
-        //System.out.println("new U: " + U.get(k));
+        newPosCol = (ArrayList)U.get(k);
+
+        System.out.println("new k: " + (k+1));
+        System.out.println("new U: " + U.get(k));
 
         int[] posColArr = new int[newPosCol.size()];
 
@@ -166,24 +196,25 @@ public class BackTracking
         // if the set of possible colors of vertex k is empty
         if(isEmpty(posColArr))
         {
-            System.out.println("U of vertex " + (k+1) + " is empty");
+            System.out.println("is empty");
             backtrack(k);
 
         } else {
             // sets the color of vertex k to the smallest color in U(array of all assignable colors)
             int smallestColor = getMin(posColArr);
+            //color.setColor(sortedDegrees[k], smallestColor);
             color.setColorBackTracking(k, smallestColor);
 
             //removes smallestColor from newPosCol
             newPosCol.remove(Integer.valueOf(color.getColorBackTracking(k)));
 
-            //System.out.println("smallest color: " + smallestColor);
-            //System.out.println("newPosCol after remove: " + newPosCol);
+            System.out.println("smallest color: " + smallestColor);
+            System.out.println("newPosCol after remove: " + newPosCol);
 
-            //insert newPosCol back into U at position k
+            //insert newPosCol back into U
             U.set(k, (ArrayList)newPosCol);
 
-            //System.out.println("U(k) after removal: " + U.get(k));
+            System.out.println("U(k) after removal: " + U.get(k));
 
             check(k);
 
@@ -200,55 +231,54 @@ public class BackTracking
         }
     }
 
+    //check()
+    //checks whether smallestColor >= q
+    //if yes backtrack(k)
+    //if no check whether smallestColor > l
+        //if yes l += 1
+        //if no check whether k=n
+            //if yes store()
+            //if no color(k) = l and k += 1
 
     /**
-     * performs some checks on whether the current coloring is promising to yield a better solution that has been
-     * achieved so far
+     * performs some checks on whether the coloring is promising
      * @param k the vertex that is considered
      */
     private static void check(int k)
     {
-        //System.out.println("check: i >= q");
-        //System.out.println("i = " + (color.getColorBackTracking(k)));
-        //System.out.println("q = " + q);
+        System.out.println("check: i >= q");
+        //System.out.println("i = " + (color.getColor(sortedDegrees[k])));
+        System.out.println("i = " + (color.getColorBackTracking(k)));
+        System.out.println("q = " + q);
 
+        //if((color.getColor(sortedDegrees[k])) >= q) {
         if((color.getColorBackTracking(k) >= q)) {
             backtrack(k);
         }
         else{
-            //System.out.println("check i > l");
-            //System.out.println("i = " + (color.getColorBackTracking(k)));
-            //System.out.println("l = " + l);
-
-            while((color.getColorBackTracking(k)) > l)
+            System.out.println("check i > l");
+            //System.out.println("i = " + (color.getColor(sortedDegrees[k])));
+            System.out.println("i = " + (color.getColorBackTracking(k)));
+            System.out.println("l = " + l);
+            //if((color.getColor(sortedDegrees[k])) > l)
+            if((color.getColorBackTracking(k)) > l)
+            {
+                //while((color.getColor(sortedDegrees[k])) > l)
+                while((color.getColorBackTracking(k)) > l)
                 {
                     l += 1;
                 }
-
-            //System.out.println("check: k < n");
-            //System.out.println("k = " + (k+1));
-            //System.out.println("n = " + n);
-
-            if(k == n - 1) { //last vertex in the array
+            }
+            System.out.println("check: k < n");
+            System.out.println("k = " + (k+1));
+            System.out.println("n = " + n);
+            if(k == n - 1){//last vertex in the array
                 System.out.println("STORE");
                 store();
             }
             else{
 
-                //L[k] = l;
-
-                //updating L(k) to the best current solution of k
-                if(L[k] == 0) {
-
-                    L[k] = color.getColorBackTracking(k);
-                }
-                else if(color.getColorBackTracking(k) < L[k]){
-
-                    L[k] = color.getColorBackTracking(k);
-                }
-
-
-                System.out.println("UPDATE L[k] = " + L[k]);
+                L[k] = l;
                 k += 1;
                 System.out.println("UPDATED k = " + (k+1) + " GO TO STEP 2");
 
@@ -258,17 +288,23 @@ public class BackTracking
         }
     }
 
+    //store()
+    //q=l
+    //j=1
+    //getVertex(largestColor)
+    //set k = j-1 and l = q-1
+
     /**
      * updates the values of the coloring
      */
     private static void store()
     {
-        //System.out.println("stored: q = " + l);
+        System.out.println("stored: q = " + l);
         q = l;
-        //System.out.println("updated: k = " + (color.getVertex(q) - 1));
+        System.out.println("updated: k = " + (color.getVertex(q) - 1));
         k = color.getVertex(q) - 2;
         l = q - 1;
-        //System.out.println("updated: l = " + (q-1));
+        System.out.println("updated: l = " + (q-1));
 
         round += 1;
         System.out.println("round: " + round);
@@ -277,30 +313,21 @@ public class BackTracking
         color.printColorList();
 
         System.out.println(color.chromNum() + " colors have been used.");
-        System.out.println("q = " + q);
 
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        System.out.println("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
         //start new round
         System.out.println("starting new round...");
         System.out.println("starting at vertex: " + (k+1));
 
-        getPosColorSet(k);
+        checkPosColorSet(k);
     }
 
 
     public static void end()
     {
         int result = q;
-        long runtime = System.currentTimeMillis() - starttime;
+        runtime = System.currentTimeMillis() - starttime;
 
         System.out.println("BackTracking:         Finished running BackTracking");
         System.out.println("BackTracking:         " + result + " colors have been used" );

@@ -24,8 +24,14 @@ public class Color
     public void setColor(int vertex, int color)
     {
         colorList[vertex-1] = color;
-        check(vertex);
-        //System.out.println("coloring vertex: " + vertex);
+        //check(vertex);
+        System.out.println("coloring vertex " + vertex + " color " + color);
+    }
+
+    public void setColorBackTracking(int vertex, int color)
+    {
+        colorList[vertex] = color;
+        System.out.println("coloring vertex " + (vertex+1) + " color " + color);
     }
 
     public void check(int vertex)
@@ -45,6 +51,47 @@ public class Color
     {
         return colorList[vertex-1];
     }
+
+    public int getColorBackTracking(int vertex)
+    {
+        return colorList[vertex];
+    }
+
+    public int getVertex(int color)
+    {
+        int max = 0;
+        int j = 0;
+
+        for(int i = 0; i < colorList.length; i++)
+        {
+            if(colorList[i] > max)
+            {
+                max = colorList[i];
+                j = i + 1;
+            }
+        }
+
+        return j;
+    }
+
+    public int getVertexBasic(int color)
+    {
+        int max = 0;
+        int j = 0;
+
+        for(int i = 0; i < colorList.length; i++)
+        {
+            if(colorList[i] > max)
+            {
+                max = colorList[i];
+                j = i;
+            }
+        }
+
+        return j;
+    }
+
+
 
     public boolean allColored()
     {

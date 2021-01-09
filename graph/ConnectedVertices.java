@@ -32,7 +32,7 @@ public class ConnectedVertices
     }
 
     /**
-     * returns an array containing all vertices that are connecte to vertex.
+     * returns an array containing all vertices that are connected to vertex.
      */
     public static int[] get(int vertex)
     {
