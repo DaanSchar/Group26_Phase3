@@ -39,6 +39,7 @@ public class Main
         //BackTracking.run();
         //BackTrackingSortedDegrees.run();
         ImplicitEnumeration.run();
+        //Ordering.run();
 
         Log.close();
     }

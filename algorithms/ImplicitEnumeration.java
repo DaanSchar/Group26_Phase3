@@ -64,7 +64,7 @@ public class ImplicitEnumeration {
 
     private static void forwards(int k) {
 
-        System.out.println("starting FORWARDS");
+        System.out.println("starting FORWARDS " + (k+1));
 
         for(int i = k; i < n; i++) {
 
@@ -76,7 +76,7 @@ public class ImplicitEnumeration {
 
             if (FC.size() == 0) {
 
-                System.out.println("FORWARDS: vertex" + (k+1) + " is empty");
+                System.out.println("FORWARDS: vertex " + (i+1) + " is empty");
 
                 //resumption point = k
                 k = i - 1;
@@ -121,11 +121,11 @@ public class ImplicitEnumeration {
 
                 end();
             }
-            else if(ub > LOWERBOUND) {
+            else  {
 
                 System.out.println("CONTINUING COLORING");
                 //update k such that C(k + 1) = ub
-                k = (color.getVertex(ub));
+                k = (color.getVertex(ub)) - 1;
 
                 //another enumeration
                 System.out.println("Another enumeration...");
@@ -145,6 +145,8 @@ public class ImplicitEnumeration {
 
     private static void backwards(int k) {
 
+        System.out.println("BACKWARDS: " + (k+1));
+
         //determine list of current predecessors
         //in this case, if k = 0 set is empty
         if(k == 0) {
@@ -153,7 +155,7 @@ public class ImplicitEnumeration {
             //STOP
             end();
         }
-        else if(k > 0) {
+        else {
 
             //get set of feasible colors FC
             ArrayList<Integer> FC = (ArrayList<Integer>) U.get(k);
@@ -161,9 +163,9 @@ public class ImplicitEnumeration {
             //update FC - remove current color
             FC.remove(Integer.valueOf(color.getColorBackTracking(k)));
 
-            if(FC.size() != 0) {
+            if(FC.size() == 0) {
 
-                System.out.println("BACKWARDS: vertex" + (k+1) + " is empty");
+                System.out.println("BACKWARDS: vertex " + (k+1) + " is empty");
 
                 //go backwards
                 k -= 1;
@@ -206,7 +208,7 @@ public class ImplicitEnumeration {
 
 
         // makes an arraylist which contains all colors smaller to ub (the best solution so far)
-        for(int i = 0; i < (max+1); i++) {
+        for(int i = 0; i < (ub-1); i++) {
 
             posCol.add(i+1);
 
