@@ -33,11 +33,12 @@ public class Main
         //FullyConnected.run();
         //Bipartite.run();
         //IsolatedVertex.run();
-        UpperBound.run();
+        //UpperBound.run();
         //Greedy.run(Graph.getN());
-        DSatur.run();
+        //DSatur.run();
         //BackTracking.run();
         //BackTrackingSortedDegrees.run();
+        ImplicitEnumeration.run();
 
         Log.close();
     }

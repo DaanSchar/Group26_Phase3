@@ -67,7 +67,7 @@ public class Color
             if(colorList[i] > max)
             {
                 max = colorList[i];
-                j = i + 1;
+                j = i;
             }
         }
 
@@ -104,6 +104,12 @@ public class Color
         }
 
         return true;
+    }
+
+    public int[] getColorList() {
+
+        return colorList;
+
     }
 
 

@@ -266,7 +266,7 @@ public class BackTracking
         //System.out.println("stored: q = " + l);
         q = l;
         //System.out.println("updated: k = " + (color.getVertex(q) - 1));
-        k = color.getVertex(q) - 2;
+        k = color.getVertex(q) - 1;
         l = q - 1;
         //System.out.println("updated: l = " + (q-1));
 

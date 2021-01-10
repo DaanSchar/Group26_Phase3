@@ -84,7 +84,7 @@ public class UpperBound {
         Log.endTimer("UpperBound", result);
     }
 
-    private static int getUpperBound() {
+    public static int getUpperBound() {
 
         return ub;
 
