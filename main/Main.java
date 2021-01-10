@@ -30,11 +30,14 @@ public class Main
     {
         Log.init();
 
-        FullyConnected.run();
-        Bipartite.run();
-        IsolatedVertex.run();
-        Greedy.run(Graph.getN());
+        //FullyConnected.run();
+        //Bipartite.run();
+        //IsolatedVertex.run();
+        UpperBound.run();
+        //Greedy.run(Graph.getN());
         DSatur.run();
+        //BackTracking.run();
+        //BackTrackingSortedDegrees.run();
 
         Log.close();
     }

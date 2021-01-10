@@ -293,7 +293,7 @@ public class BackTracking
         System.out.println("starting new round...");
         System.out.println("starting at vertex: " + (k+1));
 
-        getPosColorSet(k);
+        checkPosColorSet(k);
     }
 
 

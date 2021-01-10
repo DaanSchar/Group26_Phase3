@@ -325,12 +325,23 @@ public class BackTrackingSortedDegrees
      */
     private static void store()
     {
-        //System.out.println("stored: q = " + l);
+        System.out.println("stored: q = " + l);
         q = l;
-        //System.out.println("updated: k = " + (color.getVertex(q) - 1));
-        k = color.getVertex(q) - 1;
-        l = q - 1;
+        System.out.println("highest color: " + q);
+
         //System.out.println("updated: l = " + (q-1));
+        l = q - 1;
+
+        int maxVertex = color.getVertex(q); //get vertex with the highest coloring
+
+        int j = 1;
+
+        while(sortedDegrees[j] != maxVertex){
+
+            j++;
+        }
+
+        k = j - 1; //determine starting point for next enumeration at j - 1
 
         round += 1;
         System.out.println("round: " + round);
@@ -355,9 +366,9 @@ public class BackTrackingSortedDegrees
 
         //start new round
         System.out.println("starting new round...");
-        System.out.println("starting at vertex: " + (vertex));
+        System.out.println("starting at vertex: " + (sortedDegrees[k]));
 
-        getPosColorSet(k);
+        checkPosColorSet(k);
     }
 
 
