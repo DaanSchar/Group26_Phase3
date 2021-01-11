@@ -152,4 +152,19 @@ public class Ordering {
         System.out.println("ordered:" + sortedGLF);
 
     }
+
+    public static int[] getOrdering() {
+
+        int [] arr = new int[sortedGLF.size()];
+
+        //convert from ArrayList to array
+        for(int i = 0; i < sortedGLF.size(); i++) {
+
+            arr[i] = (Integer) sortedGLF.get(i);
+
+        }
+
+        return arr;
+
+    }
 }

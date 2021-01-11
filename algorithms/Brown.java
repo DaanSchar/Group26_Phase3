@@ -7,8 +7,9 @@ import graph.Graph;
 import logging.Log;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
-public class ImplicitEnumeration {
+public class Brown {
 
     private static int n;
     private static int m;
@@ -19,7 +20,10 @@ public class ImplicitEnumeration {
     private static int[] C; //stores colors assigned to vertices in the best solution so far
     private static ArrayList U; //stores sets of feasible colors for each vertex k
 
-    private static int k; //r
+    private static int[] order; //stores new ordering of the vertices
+
+    private static int k; //the index of the vertex being considered
+    private static int vertex; //the vertex being considered
     private static int ub;
 
     private static int UPPERBOUND;
@@ -39,6 +43,11 @@ public class ImplicitEnumeration {
 
         color = new Color(n);
 
+        Ordering.run();
+
+        order = Ordering.getOrdering(); //get order of vertices after pre-ordering
+        System.out.println("THIS IS THE ORDERING: " + Arrays.toString(order));
+
         U = new ArrayList <ArrayList<Integer>> (n);
 
         for(int i = 0; i < n; i++)
@@ -46,13 +55,14 @@ public class ImplicitEnumeration {
             U.add(new ArrayList<Integer> (n));
         }
 
-        k = 1; //start at index 1, vertex 2
+        k = 1; //start at index 1
+        vertex = order[k]; //which is this vertex
         LOWERBOUND = 1; //by default
         UPPERBOUND = n; //by default
         ub = UPPERBOUND;
 
         //set first color
-        color.setColorBackTracking(0, 1);
+        color.setColor(order[0], 1);
 
         go = true;
 
@@ -64,9 +74,12 @@ public class ImplicitEnumeration {
 
     private static void forwards(int k) {
 
-        System.out.println("starting FORWARDS " + (k+1));
+        vertex = order[k];
+        System.out.println("starting FORWARDS " + (vertex));
 
         for(int i = k; i < n; i++) {
+
+            vertex = order[i];
 
             //determine set of feasible colors
             ArrayList<Integer> FC = getPosCol(i);
@@ -76,7 +89,7 @@ public class ImplicitEnumeration {
 
             if (FC.size() == 0) {
 
-                System.out.println("FORWARDS: vertex " + (i+1) + " is empty");
+                System.out.println("FORWARDS: vertex " + vertex + " is empty");
 
                 //resumption point = k
                 k = i - 1;
@@ -87,10 +100,10 @@ public class ImplicitEnumeration {
             else {
 
                 //set color of k to smallest possible in FC
-                color.setColorBackTracking(i, getMin(FC));
+                color.setColor(vertex, getMin(FC));
 
                 //remove this color from FC(i)
-                FC.remove(Integer.valueOf(color.getColorBackTracking(i)));
+                FC.remove(Integer.valueOf(color.getColor(vertex)));
 
                 //put FC(i) back into U(i)
                 U.set(i, (ArrayList)FC);
@@ -124,12 +137,26 @@ public class ImplicitEnumeration {
             else  {
 
                 System.out.println("CONTINUING COLORING");
+
+                //get vertex such that c(vertex) = ub
+                int maxVertex = order[(color.getVertex(ub))];
+
+                System.out.println("vertex colored with ub: " + maxVertex);
+
                 //update k such that C(k + 1) = ub --- or c(k) = ub?
-                k = (color.getVertex(ub)) - 1;
+                for(int i = 0; i < order.length; i++) {
+
+                    if(order[i] == maxVertex) {
+
+                        k = i - 1;
+                    }
+                }
+
+                vertex = order[k];
 
                 //another enumeration
                 System.out.println("Another enumeration...");
-                System.out.println("starting at vertex: " + (k+1));
+                System.out.println("starting at vertex: " + vertex);
                 System.out.println();
                 System.out.println();
                 System.out.println();
@@ -145,7 +172,9 @@ public class ImplicitEnumeration {
 
     private static void backwards(int k) {
 
-        System.out.println("BACKWARDS: " + (k+1));
+        vertex = order[k];
+
+        System.out.println("BACKWARDS: " + vertex);
 
         //determine list of current predecessors
         //in this case, if k = 0 set is empty
@@ -161,11 +190,11 @@ public class ImplicitEnumeration {
             ArrayList<Integer> FC = (ArrayList<Integer>) U.get(k);
 
             //update FC - remove current color
-            FC.remove(Integer.valueOf(color.getColorBackTracking(k)));
+            FC.remove(Integer.valueOf(color.getColor(vertex)));
 
             if(FC.size() == 0) {
 
-                System.out.println("BACKWARDS: vertex " + (k+1) + " is empty");
+                System.out.println("BACKWARDS: vertex " + vertex + " is empty");
 
                 //go backwards
                 k -= 1;
@@ -182,7 +211,10 @@ public class ImplicitEnumeration {
 
     private static ArrayList<Integer> getPosCol(int k) {
 
-        int[] vertices = ConnectedVertices.get(k+1);
+        vertex = order[k];
+        System.out.println("vertex " + vertex);
+
+        int[] vertices = ConnectedVertices.get(vertex);
 
         ArrayList<Integer> posCol = new ArrayList();
 
@@ -224,7 +256,7 @@ public class ImplicitEnumeration {
         posCol.remove((Integer.valueOf(ub)));
 
         //removes own color
-        posCol.remove((Integer.valueOf(color.getColorBackTracking(k))));
+        posCol.remove((Integer.valueOf(color.getColor(vertex))));
 
         return posCol;
 

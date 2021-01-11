@@ -38,7 +38,8 @@ public class Main
         //DSatur.run();
         //BackTracking.run();
         //BackTrackingSortedDegrees.run();
-        ImplicitEnumeration.run();
+        //ImplicitEnumeration.run();
+        Brown.run();
         //Ordering.run();
 
         Log.close();
