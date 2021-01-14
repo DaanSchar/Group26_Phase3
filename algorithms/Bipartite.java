@@ -46,8 +46,10 @@ public class Bipartite
                 color = new Color(n);
                 color.setColor(startVertex, 1);
 
+
                 for (int vertex = 1; vertex < n + 1; vertex++) {
                     if(DEBUG)System.out.println("Bipartite:      " + vertex);
+
 
                     int[] vertices = ConnectedVertices.get(vertex);
                     if(DEBUG)System.out.println("Bipartite:      " + Arrays.toString(vertices));
@@ -66,6 +68,10 @@ public class Bipartite
                     Log.endTimer("Bipartite", true);
                     return;
                 }
+
+                //color.printColorList();
+                //return;
+
             }
         }
         catch (BipartiteInvalidException e)
@@ -90,6 +96,7 @@ public class Bipartite
         if (color.getColor(vertex) == 1)
         {
             int[] vertices = ConnectedVertices.get(vertex);
+
 
             for (int i = 0; i < vertices.length; i++)
             {

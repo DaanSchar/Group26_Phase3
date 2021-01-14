@@ -232,13 +232,18 @@ public class DSatur {
     {
         runtime = System.currentTimeMillis() - starttime;
 
-        color.printColorList();
+        //color.printColorList();
 
         int result = color.chromNum();
         System.out.println("DSatur:         " + result + " colors have been used" );
         System.out.println("DSatur:         Finished running DSatur");
         Log.endTimer("DSatur", result);
 
+    }
+
+    public static int getChrom()
+    {
+        return color.chromNum();
     }
 
 }

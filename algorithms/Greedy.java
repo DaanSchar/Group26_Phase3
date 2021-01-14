@@ -6,6 +6,7 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -16,6 +17,7 @@ public class Greedy {
     private static ColEdge[] e;
     private static Color color;
     private static int[] path;
+    private static int chromNum;
 
     public static void run(int calculations)
     {
@@ -36,6 +38,8 @@ public class Greedy {
             chromNums[i] = color.chromNum();
         }
 
+        chromNum = getMin(chromNums);
+
         System.out.println("Greedy:         Chromatic number:" + getMin(chromNums));
         System.out.println("Greedy:         Finished Running.");
         Log.endTimer("Greedy", getMin(chromNums));
@@ -43,6 +47,7 @@ public class Greedy {
 
     private static void giveColor(int vertex)
     {
+       // System.out.println("Greedy:         " + vertex);
         int[] vertices = ConnectedVertices.get(vertex);
 
         for (int i = 0; i < vertices.length; i++)
@@ -66,6 +71,7 @@ public class Greedy {
 
         //randomising the sequence
         makeRandomPath(path);
+
 
         for(int i = 0; i < n; i++)
         {
@@ -107,4 +113,10 @@ public class Greedy {
         return min;
 
     }
+
+    public static int getChrom()
+    {
+        return chromNum;
+    }
+
 }

@@ -78,11 +78,8 @@ public class FullyConnected
         Log.endTimer("FullyConnected", true);
     }
 
-
-
     public static boolean isFullyConnected()
     {
         return fullyConnected;
     }
-
 }

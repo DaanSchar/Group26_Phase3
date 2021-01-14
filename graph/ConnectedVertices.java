@@ -9,9 +9,9 @@ public class ConnectedVertices
 
     private static int[][] connectMatrix;
 
-    private static int n = Graph.getN();
-    private static int m = Graph.getM();
-    private static ColEdge[] e = Graph.getE();
+    private static int n;
+    private static int m;
+    private static ColEdge[] e;
 
 
     /**
@@ -20,6 +20,11 @@ public class ConnectedVertices
      */
     public static void makeMatrix()
     {
+
+        n = Graph.getN();
+        m = Graph.getM();
+        e = Graph.getE();
+
         connectMatrix = new int[n][n];
 
         // sets the row of value u and the column of value v to 1 (this means they are connected) and vice versa
@@ -41,7 +46,6 @@ public class ConnectedVertices
         int tempConnectedVertices[] = new int[100000];
 
         int j = 0;
-
 
         for (int i = 0; i < n; i++)
         {

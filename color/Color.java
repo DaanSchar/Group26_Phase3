@@ -24,14 +24,14 @@ public class Color
     public void setColor(int vertex, int color)
     {
         colorList[vertex-1] = color;
-        check(vertex);
-        System.out.println("coloring vertex " + vertex + " color " + color);
+        //check(vertex);
     }
+
+
 
     public void setColorBackTracking(int vertex, int color)
     {
         colorList[vertex] = color;
-        System.out.println("coloring vertex " + (vertex+1) + " color " + color);
     }
 
     public void check(int vertex)

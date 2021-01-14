@@ -37,6 +37,7 @@ public class Log
             Scanner fr = new Scanner(totalRunFile);
             runNumber = fr.nextInt();
             System.out.println("Log:            Run: " + (runNumber+1));
+            System.out.println("Log:            Graph: " + Main.getGraphName());
             fr.close();
 
             fw = new FileWriter(filePath,true);
