@@ -15,7 +15,6 @@ public class Greedy {
     private static int n;
     private static int m;
     private static ColEdge[] e;
-    private static Color color;
     private static int[] path;
     private static int chromNum;
 
@@ -31,21 +30,19 @@ public class Greedy {
 
         int[] chromNums = new int[calculations];
 
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < calculations; i++)
         {
-            color = new Color(n);
-            colorGraph();
-            chromNums[i] = color.chromNum();
+            chromNums[i] = colorGraph();
         }
 
         chromNum = getMin(chromNums);
 
-        System.out.println("Greedy:         Chromatic number:" + getMin(chromNums));
+        System.out.println("Greedy:         Chromatic number:" + chromNum);
         System.out.println("Greedy:         Finished Running.");
-        Log.endTimer("Greedy", getMin(chromNums));
+        Log.endTimer("Greedy", chromNum);
     }
 
-    private static void giveColor(int vertex)
+    private static void giveColor(int vertex, Color color)
     {
        // System.out.println("Greedy:         " + vertex);
         int[] vertices = ConnectedVertices.get(vertex);
@@ -61,6 +58,8 @@ public class Greedy {
 
     private static int colorGraph()
     {
+        Color color = new Color(n);
+
         path = new int[n];
 
         // initial path consists of 1,2,3,4,..,n
@@ -75,7 +74,7 @@ public class Greedy {
 
         for(int i = 0; i < n; i++)
         {
-            giveColor(path[i]);
+            giveColor(path[i], color);
         }
 
         return color.chromNum();

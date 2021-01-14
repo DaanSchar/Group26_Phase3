@@ -82,14 +82,6 @@ public class DSatur {
             }
         }
 
-        /*System.out.println("List of all vertices with their degrees");
-
-        for(int i = 0; i < degrees.length; i++)
-        {
-            System.out.println("Vertex: " + (i + 1) + " degree: " + degrees[i]);
-        }*/
-
-
         //calculate maximum degree
         int maxDegree = 0;
 
@@ -116,21 +108,7 @@ public class DSatur {
             }
         }
 
-        /*System.out.println("Vertices arranged by decreasing order of degree");
-
-        for(int i = 0; i < sortedDegrees.length; i++)
-        {
-            System.out.println("Vertex: " + sortedDegrees[i] + " degree: " + degrees[sortedDegrees[i]-1]);
-        }*/
-
         maxDegreeVertex = sortedDegrees[0];
-
-        /*//loop through all vertices of sortedDegrees
-        for(int i = 0; i < sortedDegrees.length; i++)
-        {
-            //show connectedVertices
-            System.out.println("vertex: " + sortedDegrees[i] + " connected to :" + Arrays.toString(ConnectedVertices.get(sortedDegrees[i])));
-        }*/
 
     }
 

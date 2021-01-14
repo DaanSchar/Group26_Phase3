@@ -26,6 +26,8 @@ public class Main
                 Graph.read(graphName);
                 ConnectedVertices.makeMatrix();
                 runProgram();
+                Log.init();
+                Log.close();
             }
         }
 
@@ -45,9 +47,10 @@ public class Main
             Bipartite.run();
             if(!Bipartite.isBipartite())
             {
-                Greedy.run(Graph.getN() * Graph.getM());
+                Greedy.run(Graph.getM());
                 DSatur.run();
                 ImplicitEnumeration.run();
+                OrderedGreedy.run();
                 chromaticNumber = getBest();
             } else {
                 chromaticNumber = 2;
@@ -64,15 +67,18 @@ public class Main
 
     public static int getBest()
     {
-        int list[] = new int[3];
+        int list[] = new int[4];
         list[0] = Greedy.getChrom();
         list[1] = DSatur.getChrom();
         list[2] = ImplicitEnumeration.getChrom();
+        list[3] = OrderedGreedy.getChrom();
 
         int min = list[0];
 
         for(int i = 0; i < list.length; i++)
         {
+            System.out.println("possible chromatic number: " + list[i]);
+
             if (list[i] < min)
             {
                 min = list[i];

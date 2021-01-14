@@ -132,7 +132,6 @@ public class Color
                 max = colorList[i];
             }
         }
-
         return max;
     }
 

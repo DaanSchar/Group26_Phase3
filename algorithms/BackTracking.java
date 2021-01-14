@@ -99,6 +99,7 @@ public class BackTracking
     }
 
 
+
     /**
      * returns array containing the possible colors this vertex can be assigned.
      * @param k the vertex that is considered
