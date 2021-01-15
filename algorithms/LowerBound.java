@@ -3,6 +3,7 @@ package algorithms;
 import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
+import logging.Log;
 
 import java.util.ArrayList;
 
@@ -18,11 +19,19 @@ public class LowerBound
     private static ArrayList<Integer> X;
     private static int maxSize;
 
+    private static ArrayList<Integer> lbPath;
+
     public static int get()
     {
+        Log.startTimer();
+        System.out.println("LowerBound:         Running...");
+
+
         n = Graph.getN();
         m = Graph.getM();
         e = Graph.getE();
+
+        lbPath = new ArrayList<Integer>();
 
         P = new ArrayList<Integer>();
         R = new ArrayList<Integer>();
@@ -43,8 +52,47 @@ public class LowerBound
             resetP();
             resetR();
         }
+
+        System.out.println("LowerBound:         LowerBound: " + maxSize);
+        System.out.println("LowerBound:         Finished Running.");
+        Log.endTimer("LowerBound", maxSize);
         return maxSize;
     }
+
+
+    /**
+     * returns path containing vertices only of the largest cliques
+     */
+    public static ArrayList<Integer> getPath()
+    {
+        P = new ArrayList<Integer>();
+        R = new ArrayList<Integer>();
+
+        for(int vertex = 1; vertex < n + 1; vertex++)
+        {
+            R.add(vertex);
+            addToP(vertex);
+
+            for (int i = 1; i < n + 1; i++) {
+                if (isConnectedToR(i)) {
+                    R.add(i);
+                }
+            }
+
+            if(R.size() == maxSize) {
+                for (int i = 0; i < R.size(); i++)
+                {
+                    lbPath.add(R.get(i));
+                }
+            }
+            resetP();
+            resetR();
+        }
+
+        return lbPath;
+
+    }
+
 
     /**
      *  adds all vertices adjacent to vertex to P

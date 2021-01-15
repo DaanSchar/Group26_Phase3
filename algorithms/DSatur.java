@@ -48,7 +48,7 @@ public class DSatur {
     {
         starttime = System.currentTimeMillis();
         Log.startTimer();
-        System.out.println("DSatur:         Running DSatur...");
+        System.out.println("DSatur:             Running DSatur...");
 
         n = Graph.getN();
         m = Graph.getM();
@@ -213,8 +213,8 @@ public class DSatur {
         //color.printColorList();
 
         int result = color.chromNum();
-        System.out.println("DSatur:         " + result + " colors have been used" );
-        System.out.println("DSatur:         Finished running DSatur");
+        System.out.println("DSatur:             " + result + " colors have been used" );
+        System.out.println("DSatur:             Finished running DSatur");
         Log.endTimer("DSatur", result);
 
     }

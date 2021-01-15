@@ -21,7 +21,7 @@ public class Greedy {
     public static void run(int calculations)
     {
 
-        System.out.println("Greedy:         Running...");
+        System.out.println("Greedy:             Running...");
         Log.startTimer();
 
         n = Graph.getN();
@@ -37,25 +37,37 @@ public class Greedy {
 
         chromNum = getMin(chromNums);
 
-        System.out.println("Greedy:         Chromatic number:" + chromNum);
-        System.out.println("Greedy:         Finished Running.");
+        System.out.println("Greedy:             Chromatic number:" + chromNum);
+        System.out.println("Greedy:             Finished Running.");
         Log.endTimer("Greedy", chromNum);
     }
 
+    /**
+     * Greedy coloring method.
+     * gives the smallest appropriate colororing to a vertex
+     */
     private static void giveColor(int vertex, Color color)
     {
-       // System.out.println("Greedy:         " + vertex);
         int[] vertices = ConnectedVertices.get(vertex);
+
+        if(color.getColor(vertex) == 0)
+        {
+            color.setColor(vertex, 1);
+        }
 
         for (int i = 0; i < vertices.length; i++)
         {
-            if(color.getColor(vertex) <= color.getColor(vertices[i]))
+            if(color.getColor(vertex) == color.getColor(vertices[i]))
             {
                 color.setColor(vertex, color.getColor(vertices[i]) + 1);
+                i = -1;
             }
         }
     }
 
+    /**
+     * colors the graph once
+     */
     private static int colorGraph()
     {
         Color color = new Color(n);
@@ -80,6 +92,9 @@ public class Greedy {
         return color.chromNum();
     }
 
+    /**
+     * shuffles the array
+     */
     private static void makeRandomPath(int arr[])
     {
         Random r = new Random();
@@ -96,6 +111,9 @@ public class Greedy {
         }
     }
 
+    /**
+     * returns smallest value of an int array
+     */
     private static int getMin(int[] a)
     {
 

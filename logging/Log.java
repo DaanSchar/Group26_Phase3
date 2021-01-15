@@ -36,8 +36,11 @@ public class Log
             File totalRunFile = new File("logs/totalruns.txt");
             Scanner fr = new Scanner(totalRunFile);
             runNumber = fr.nextInt();
-            System.out.println("Log:            Run: " + (runNumber+1));
-            System.out.println("Log:            Graph: " + Main.getGraphName());
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("Log:                ::  Run:      " + (runNumber+1));
+            System.out.println("Log:                ::  Graph:    " + Main.getGraphName());
+            System.out.println("Log:                ::  Vertices: " + Graph.getN());
+            System.out.println("Log:                ::  Edges:    " + Graph.getM());
             fr.close();
 
             fw = new FileWriter(filePath,true);
@@ -111,7 +114,7 @@ public class Log
 
     public static void close()
     {
-        System.out.println("Log:            closing");
+        System.out.println("Log:                ::  closing");
         pw.print(totalTime+" ms,");
         pw.println(order);
         pw.close();

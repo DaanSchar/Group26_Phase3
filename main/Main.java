@@ -15,9 +15,9 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 12;
+        int graph = 1;
 
-        for(int i = graph; i < graph+1; i++)
+        for(int i = graph; i < 21; i++)
         {
             if(i != 15)
             {
@@ -25,9 +25,16 @@ public class Main
                 graphName = i + ".txt";
                 Graph.read(graphName);
                 ConnectedVertices.makeMatrix();
-                LowerBound.get();
-                //Bipartite.run();
                 Log.init();
+
+                // algorithms
+                LowerBound.get();
+                Greedy.run(Graph.getN());
+                OrderedGreedy.run();
+                LowerBoundGreedy.run();
+                DSatur.run();
+                Bipartite.run();
+
                 Log.close();
             }
         }

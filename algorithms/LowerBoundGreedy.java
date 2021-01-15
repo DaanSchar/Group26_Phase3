@@ -6,7 +6,9 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
-public class OrderedGreedy
+import java.util.ArrayList;
+
+public class LowerBoundGreedy
 {
 
     private static int n;
@@ -14,6 +16,7 @@ public class OrderedGreedy
     private static ColEdge[] e;
     private static Color color;
 
+    private static ArrayList<Integer> cliques;
     private static int[] degrees;
     private static int[] sortedDegrees;
 
@@ -22,28 +25,31 @@ public class OrderedGreedy
     public static void run()
     {
         Log.startTimer();
-        System.out.println("OrderedGreedy:      Running...");
+        System.out.println("LowerBoundGreedy:   Running...");
 
         n = Graph.getN();
         m = Graph.getM();
         e = Graph.getE();
         color = new Color(n);
 
-        // sorts the vertices in order of degree
+        cliques = LowerBound.getPath();
         degreeSort();
 
-        // colors all vertices
-        for(int i = 0; i < sortedDegrees.length; i++)
+        for(int i = 0; i < cliques.size(); i++)
+        {
+            giveColor(cliques.get(i));
+        }
+
+        for(int i = 0; i < n; i++)
         {
             giveColor(sortedDegrees[i]);
         }
 
+
         chromaticNumber = color.chromNum();
-
-
-        System.out.println("OrderedGreedy:      Chromatic Number: " + chromaticNumber);
-        System.out.println("OrderedGreedy:      Finished Running.");
-        Log.endTimer("OrderedGreedy", chromaticNumber);
+        System.out.println("LowerBoundGreedy:   Chromatic number: " + chromaticNumber);
+        System.out.println("LowerBoundGreedy:   Finished Running.");
+        Log.endTimer("LowerBoundGreedy", chromaticNumber);
 
     }
 
@@ -68,6 +74,7 @@ public class OrderedGreedy
             }
         }
     }
+
 
     /**
      * sorts the vertices in order of degree and
@@ -119,7 +126,6 @@ public class OrderedGreedy
             }
         }
     }
-
 
     public static int getChrom()
     {
