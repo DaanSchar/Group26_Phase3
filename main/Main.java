@@ -15,7 +15,7 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 10;
+        int graph = 12;
 
         for(int i = graph; i < graph+1; i++)
         {
@@ -25,7 +25,8 @@ public class Main
                 graphName = i + ".txt";
                 Graph.read(graphName);
                 ConnectedVertices.makeMatrix();
-                runProgram();
+                LowerBound.get();
+                //Bipartite.run();
                 Log.init();
                 Log.close();
             }

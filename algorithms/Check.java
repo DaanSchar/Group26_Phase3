@@ -29,6 +29,10 @@ public class Check
             {
                 return false;
             }
+            if(color.getColor(e[i].u) == 0 || color.getColor(e[i].v) == 0)
+            {
+                return false;
+            }
         }
         return true;
     }
