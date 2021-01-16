@@ -62,8 +62,7 @@ public class DSatur {
 
 
     //step 1
-    public static void degreeSort()
-    {
+    public static void degreeSort() {
         //make array that stores the degrees of each vertex
         degrees = new int[n];
 
@@ -85,8 +84,7 @@ public class DSatur {
         //calculate maximum degree
         int maxDegree = 0;
 
-        for(int i = 0; i < degrees.length; i++)
-        {
+        for(int i = 0; i < degrees.length; i++) {
             maxDegree = Math.max(maxDegree, degrees[i]);
         }
 
@@ -96,8 +94,7 @@ public class DSatur {
 
         int position = 0;
 
-        for(int i = maxDegree; i >= 0; i--)
-        {
+        for(int i = maxDegree; i >= 0; i--) {
             for(int j = 0; j < degrees.length; j++)
             {
                 if(degrees[j] == i)
@@ -113,29 +110,25 @@ public class DSatur {
     }
 
     //step 2
-    public static void firstColoring()
-    {
+    public static void firstColoring() {
         //colors = new int[n];
         color = new Color(n);
 
         color.setColor(maxDegreeVertex, 1);
 
-        //color.printColorList();
-
     }
 
     //step 3
-    public static int saturation()
-    {
+    public static int saturation() {
         int maxSaturation = 0;
 
         int [] saturationArray = new int[n];
 
         //loop through all vertices of sortedDegrees
-        for(int i = 0; i < sortedDegrees.length; i++)
-        {
-            if(color.getColor(sortedDegrees[i]) == 0)
-            {
+        for(int i = 0; i < sortedDegrees.length; i++) {
+
+            if(color.getColor(sortedDegrees[i]) == 0) {
+
                 int saturation = 0;
 
                 //get connected vertices
@@ -152,8 +145,8 @@ public class DSatur {
 
                 }
 
-                if(saturation > maxSaturation)
-                {
+                if(saturation > maxSaturation) {
+
                     maxSaturation = saturation;
                     maxSatVertex = sortedDegrees[i];
                 }
@@ -161,12 +154,10 @@ public class DSatur {
 
         }
 
-        //System.out.println("vertex " + maxSatVertex + " has maximal saturation: " + maxSaturation);
+        if(maxSaturation == 0) {
 
-        if(maxSaturation == 0)
-        {
-            for(int i = 0; i < sortedDegrees.length; i++)
-            {
+            for(int i = 0; i < sortedDegrees.length; i++) {
+
                 if(color.getColor(sortedDegrees[i]) == 0)
                 {
                     maxDegreeVertex = sortedDegrees[i];
@@ -183,31 +174,51 @@ public class DSatur {
     }
 
     //step 4
-    public static void condition()
-    {
-        if(color.allColored() == true)
-        {
+    public static void condition() {
+
+        if(color.allColored() == true) {
+
             //System.out.println("end");
             end();
         }
-        else
-        {
+        else {
             coloring();
         }
     }
 
-    public static void coloring()
-    {
+    public static void coloring() {
+
         int vertex = saturation();
 
-        color.setColor(vertex, 1);
+        giveColor(vertex);
 
         condition();
     }
 
-    //step 5
-    public static void end()
+    private static void giveColor(int vertex)
     {
+        int[] vertices = ConnectedVertices.get(vertex);
+
+        if(color.getColor(vertex) == 0)
+        {
+            color.setColor(vertex, 1);
+        }
+
+        for (int i = 0; i < vertices.length; i++)
+        {
+            if(color.getColor(vertex) == color.getColor(vertices[i]))
+            {
+                color.setColor(vertex, color.getColor(vertices[i]) + 1);
+                i = -1;
+            }
+        }
+    }
+
+
+
+    //step 5
+    public static void end() {
+
         runtime = System.currentTimeMillis() - starttime;
 
         //color.printColorList();

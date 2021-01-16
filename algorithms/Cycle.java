@@ -26,6 +26,7 @@ public class Cycle {
 
     public static void run() {
 
+        Log.startTimer();
         n = Graph.getN();
         m = Graph.getM();
         e = Graph.getE();

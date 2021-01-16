@@ -318,3 +318,5 @@
 355,20.txt,166,197,0.01438481197517342,4033 ms,LowerBound[1 s][chrom: 2],Greedy[1 s][chrom: 3],OrderedGreedy[0 s][chrom: 3],LowerBoundGreedy[1 s][chrom: 4],DSatur[0 s][chrom: 1],Bipartite[0 s][is: false],
 356,1.txt,218,1267,0.05356614382953537,8057 ms,LowerBound[2 s][chrom: 6],Greedy[2 s][chrom: 7],OrderedGreedy[0 s][chrom: 8],LowerBoundGreedy[2 s][chrom: 8],DSatur[1 s][chrom: 1],Bipartite[0 s][is: false],
 357,2.txt,529,271,0.0019404823280059576,56821 ms,LowerBound[12 s][chrom: 2],Greedy[12 s][chrom: 3],OrderedGreedy[0 s][chrom: 3],LowerBoundGreedy[12 s][chrom: 3],DSatur[6 s][chrom: 1],Bipartite[13 s][is: false],
+359,1.txt,218,1267,0.05356614382953537,7718 ms,Cycle[0 s][is: false],LowerBound[2 s][chrom: 6],Greedy[2 s][chrom: 7],OrderedGreedy[0 s][chrom: 8],LowerBoundGreedy[2 s][chrom: 8],DSatur[1 s][chrom: 1],Bipartite[0 s][is: false],
+360,1.txt,218,1267,0.05356614382953537,8133 ms,Cycle[0 s][is: false],LowerBound[2 s][chrom: 6],Greedy[2 s][chrom: 7],OrderedGreedy[0 s][chrom: 8],LowerBoundGreedy[2 s][chrom: 8],DSatur[1 s][chrom: 8],Bipartite[0 s][is: false],

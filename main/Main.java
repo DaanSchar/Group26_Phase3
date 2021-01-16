@@ -17,7 +17,7 @@ public class Main
 
         int graph = 1;
 
-        for(int i = graph; i < 21; i++)
+        for(int i = graph; i < graph+1; i++)
         {
             if(i != 15)
             {
@@ -28,6 +28,7 @@ public class Main
                 Log.init();
 
                 // algorithms
+                Cycle.run();
                 LowerBound.get();
                 Greedy.run(Graph.getN());
                 OrderedGreedy.run();
