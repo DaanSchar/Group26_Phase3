@@ -3,6 +3,7 @@ package algorithms;
 import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
+import logging.Log;
 
 import java.util.ArrayList;
 
@@ -19,6 +20,10 @@ public class Cycle {
 
     private static ArrayList<Integer> isSeen; //stores vertices that have been visited already
 
+    private static boolean isCycleEven;
+    private static boolean isCycleOdd;
+
+
     public static void run() {
 
         n = Graph.getN();
@@ -29,18 +34,42 @@ public class Cycle {
         start = 1; //starting at vertex 1
         isSeen = new ArrayList<>(); //no vertex has been visited yet
 
-        if(isCyclic(start)) {
+        isCycleEven = false;
+        isCycleOdd = false;
 
-            System.out.println("Cyclic graph");
-        }
-        else {
-            System.out.println("not a cycle");
+        if (isCyclic(start)) {
+
+            if (n % 2 == 0) {
+
+                isCycleEven = true;
+                System.out.println("Cycle: Graph is an even cycle");
+                System.out.println("Cycle: Finished Running.");
+                Log.endTimer("Cycle", true);
+                return;
+            } else {
+
+                isCycleOdd = true;
+                System.out.println("Cycle: Graph is an odd cycle");
+                System.out.println("Cycle: Finished Running.");
+                Log.endTimer("Cycle", true);
+                return;
+
+            }
+
+        } else {
+
+            System.out.println("Cycle: Graph is not a cycle");
+            System.out.println("Cycle: Finished Running.");
+            Log.endTimer("Cycle", false);
+            return;
+
+
         }
     }
 
     private static boolean isCyclic(int v) {
 
-        if(isSeen.size() == n) {
+        if (isSeen.size() == n) {
 
             return true;
         }
@@ -81,13 +110,28 @@ public class Cycle {
 
         System.out.println("NOW CHECKING v : " + v);
 
-        if(isCyclic(v)) {
+        if (isCyclic(v)) {
 
             return true;
 
         }
 
         return false;
+    }
+
+    public static int getChromNum() {
+
+        if (isCycleEven) {
+            return 2;
+        }
+        else if (isCycleOdd) {
+
+            return 3;
+        }
+        else {
+
+            return 0;
+        }
     }
 }
 

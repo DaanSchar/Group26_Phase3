@@ -15,15 +15,15 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 1;
+        int graph = 6;
 
-        for(int i = graph; i < 2; i++)
+        for(int i = graph; i < 7; i++)
         {
             if(i != 15)
             {
                 // data setup
-                //graphName = i + ".txt";
-                graphName = args[0];
+                graphName = i + ".txt";
+                //graphName = args[0];
                 Graph.read(graphName);
                 ConnectedVertices.makeMatrix();
                 Log.init();
@@ -34,12 +34,14 @@ public class Main
                 //Greedy.run(Graph.getN());
                 //OrderedGreedy.run();
                 //LowerBoundGreedy.run();
-                DSatur.run();
+                //DSatur.run();
                 //Bipartite.run();
                 //BackTracking.run();
                 //BackTrackingBrown.run();
-                //ColoringDecision.run();
-                Cycle.run();
+                ColoringDecision.run();
+                //Cycle.run();
+
+
 
                 Log.close();
             }
@@ -53,9 +55,11 @@ public class Main
 
         Log.init();
 
-        // Circle.run();
-        // if(!Circle.isCircle())
-        // {
+        Cycle.run();
+        if(Cycle.getChromNum() == 0) {
+
+            chromaticNumber = Cycle.getChromNum();
+        }
         if(!TreeDetection.isTree())
         {
             Bipartite.run();

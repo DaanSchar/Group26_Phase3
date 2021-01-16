@@ -90,7 +90,7 @@ public class ColoringDecision {
 
         color.printColorList();
 
-        int result = pc;
+        int result = color.chromNum();
 
         System.out.println("ColoringDecision:         " + result + " colors have been used");
         System.out.println("ColoringDecision:         Finished running ColoringDecision");
