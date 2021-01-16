@@ -17,23 +17,29 @@ public class Main
 
         int graph = 1;
 
-        for(int i = graph; i < 21; i++)
+        for(int i = graph; i < 2; i++)
         {
             if(i != 15)
             {
                 // data setup
-                graphName = i + ".txt";
+                //graphName = i + ".txt";
+                graphName = args[0];
                 Graph.read(graphName);
                 ConnectedVertices.makeMatrix();
                 Log.init();
 
                 // algorithms
+                UpperBound.get();
                 LowerBound.get();
-                Greedy.run(Graph.getN());
-                OrderedGreedy.run();
-                LowerBoundGreedy.run();
+                //Greedy.run(Graph.getN());
+                //OrderedGreedy.run();
+                //LowerBoundGreedy.run();
                 DSatur.run();
-                Bipartite.run();
+                //Bipartite.run();
+                //BackTracking.run();
+                //BackTrackingBrown.run();
+                //ColoringDecision.run();
+                Cycle.run();
 
                 Log.close();
             }
@@ -57,7 +63,6 @@ public class Main
             {
                 Greedy.run(Graph.getM());
                 DSatur.run();
-                ImplicitEnumeration.run();
                 OrderedGreedy.run();
                 chromaticNumber = getBest();
             } else {
@@ -78,7 +83,7 @@ public class Main
         int list[] = new int[4];
         list[0] = Greedy.getChrom();
         list[1] = DSatur.getChrom();
-        list[2] = ImplicitEnumeration.getChrom();
+        list[2] = BackTracking.getChrom();
         list[3] = OrderedGreedy.getChrom();
 
         int min = list[0];

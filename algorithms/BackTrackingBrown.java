@@ -59,8 +59,8 @@ public class BackTrackingBrown {
 
         k = 1; //start at index 1
         vertex = order[k]; //which is this vertex
-        LOWERBOUND = 2; //by default
-        UPPERBOUND = n; //by default
+        LOWERBOUND = LowerBound.get();
+        UPPERBOUND = UpperBound.getUpperBound();
         ub = UPPERBOUND;
 
         //set first color
@@ -315,5 +315,10 @@ public class BackTrackingBrown {
         System.out.println("BackTrackingBrown:         " + result);
         System.out.println("BackTrackingBrown:         Finished running BackTrackingBrown");
         Log.endTimer("BackTrackingBrown", result);
+    }
+
+    public static int getChrom()
+    {
+        return color.chromNum();
     }
 }

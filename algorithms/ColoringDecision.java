@@ -32,8 +32,8 @@ public class ColoringDecision {
 
         color = new Color(n);
 
-        LOWERBOUND = 3; //by default
-        UPPERBOUND = n; //by default
+        LOWERBOUND = LowerBound.get();
+        UPPERBOUND = UpperBound.getUpperBound();
 
         pc = LOWERBOUND;
 
@@ -64,6 +64,10 @@ public class ColoringDecision {
                 color.setColor(v, 0);
             }
         }
+        System.out.println("coloring with " + pc + " colors not possible.");
+        //set pc += 1
+        pc += 1;
+        graphColoring(pc, v);
         return false;
     }
 
@@ -87,10 +91,16 @@ public class ColoringDecision {
         color.printColorList();
 
         int result = pc;
+
         System.out.println("ColoringDecision:         " + result + " colors have been used");
         System.out.println("ColoringDecision:         Finished running ColoringDecision");
         Log.endTimer("ColoringDecision", result);
 
+    }
+
+    public static int getChrom()
+    {
+        return color.chromNum();
     }
 
 }

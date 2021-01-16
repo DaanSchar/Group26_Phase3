@@ -45,8 +45,8 @@ public class BackTracking {
 
         color = new Color(n);
 
-        LOWERBOUND = 3; //by default
-        UPPERBOUND = n; //by default
+        LOWERBOUND = LowerBound.get(); //by default
+        UPPERBOUND = UpperBound.getUpperBound(); //by default
 
         pc = LOWERBOUND; //set initial pc to 2
         vertex = 2; //set starting vertex to 2
@@ -218,5 +218,10 @@ public class BackTracking {
         System.out.println("BackTracking:         Finished running BackTracking");
         Log.endTimer("BackTracking", result);
 
+    }
+
+    public static int getChrom()
+    {
+        return color.chromNum();
     }
 }

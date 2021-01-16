@@ -21,7 +21,7 @@ public class UpperBound {
     private static int ub;
 
 
-    public static void run() {
+    public static void get() {
 
         Log.startTimer();
         System.out.println("UpperBound:         Running UpperBound...");
@@ -41,7 +41,6 @@ public class UpperBound {
     private static void upperBound() {
 
         ub = maxDegree;
-        //ub = maxDegree + 1; - if graph is complete or odd-cycle
         end();
     }
 
