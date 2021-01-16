@@ -15,9 +15,9 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 6;
+        int graph = 4;
 
-        for(int i = graph; i < 7; i++)
+        for(int i = graph; i < 5; i++)
         {
             if(i != 15)
             {
@@ -38,7 +38,9 @@ public class Main
                 //Bipartite.run();
                 //BackTracking.run();
                 //BackTrackingBrown.run();
+                //ColoringDecision_try.run();
                 ColoringDecision.run();
+                //BackTracking_try.run();
                 //Cycle.run();
 
 
