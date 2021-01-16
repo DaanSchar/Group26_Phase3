@@ -1,0 +1,11 @@
+249#
+
+Graph:  5.txt
+Total Vertices: 93
+Total Edges:    92
+
+BackTrackingBasic
+Total time: 62
+Chromatic number: 3
+
+Total run time: 62

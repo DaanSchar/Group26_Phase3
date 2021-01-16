@@ -1,0 +1,15 @@
+62#
+
+Graph:  1.txt
+Total Vertices: 76
+Total Edges:    303
+
+DSatur
+Total time: 1610053421468
+Chromatic number: 11
+
+BackTracking
+Total time: 14
+Chromatic number: 12
+
+Total run time: 1610053421482

@@ -1,0 +1,11 @@
+245#
+
+Graph:  1.txt
+Total Vertices: 76
+Total Edges:    303
+
+BackTrackingBasic
+Total time: 72
+Chromatic number: 4
+
+Total run time: 72

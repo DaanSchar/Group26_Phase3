@@ -1,0 +1,11 @@
+253#
+
+Graph:  8.txt
+Total Vertices: 56
+Total Edges:    483
+
+BackTrackingBasic
+Total time: 54
+Chromatic number: 12
+
+Total run time: 54
