@@ -24,13 +24,10 @@ public class Color
     public void setColor(int vertex, int color)
     {
         colorList[vertex-1] = color;
-        //check(vertex);
-        System.out.println("coloring vertex " + vertex + " color " + color);
     }
 
     public void setColorCheck(int vertex, int color)
     {
-        System.out.println("coloring vertex " + vertex + " color " + color);
         colorList[vertex-1] = color;
         check(vertex);
     }
@@ -40,7 +37,6 @@ public class Color
 
         int [] connVertices = ConnectedVertices.get(vertex);
 
-        System.out.println("CHECK: vertex " + vertex + " connected to " + Arrays.toString(connVertices));
 
         for(int i = 0; i < connVertices.length; i++)
         {
