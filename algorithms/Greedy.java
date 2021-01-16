@@ -6,7 +6,6 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -16,13 +15,13 @@ public class Greedy {
     private static int n;
     private static int m;
     private static ColEdge[] e;
-    private static Color color;
     private static int[] path;
+    private static int chromNum;
 
     public static void run(int calculations)
     {
 
-        System.out.println("Greedy:         Running...");
+        System.out.println("Greedy:             Running...");
         Log.startTimer();
 
         n = Graph.getN();
@@ -31,35 +30,48 @@ public class Greedy {
 
         int[] chromNums = new int[calculations];
 
-        for(int i = 0; i < n; i++)
+        for(int i = 0; i < calculations; i++)
         {
-            color = new Color(n);
-            colorGraph();
-            chromNums[i] = color.chromNum();
+            chromNums[i] = colorGraph();
         }
 
-        System.out.println(Arrays.toString(chromNums));
+        chromNum = getMin(chromNums);
 
-        System.out.println("Greedy:         Chromatic number:" + getMin(chromNums));
-        System.out.println("Greedy:         Finished Running.");
-        Log.endTimer("Greedy", getMin(chromNums));
+        System.out.println("Greedy:             Chromatic number:" + chromNum);
+        System.out.println("Greedy:             Finished Running.");
+        Log.endTimer("Greedy", chromNum);
     }
 
-    private static void giveColor(int vertex)
+    /**
+     * Greedy coloring method.
+     * gives the smallest appropriate colororing to a vertex
+     */
+    private static void giveColor(int vertex, Color color)
     {
         int[] vertices = ConnectedVertices.get(vertex);
 
+        if(color.getColor(vertex) == 0)
+        {
+            color.setColor(vertex, 1);
+        }
+
         for (int i = 0; i < vertices.length; i++)
         {
-            if(color.getColor(vertex) <= color.getColor(vertices[i]))
+            if(color.getColor(vertex) == color.getColor(vertices[i]))
             {
                 color.setColor(vertex, color.getColor(vertices[i]) + 1);
+                i = -1;
             }
         }
     }
 
+    /**
+     * colors the graph once
+     */
     private static int colorGraph()
     {
+        Color color = new Color(n);
+
         path = new int[n];
 
         // initial path consists of 1,2,3,4,..,n
@@ -71,14 +83,18 @@ public class Greedy {
         //randomising the sequence
         makeRandomPath(path);
 
+
         for(int i = 0; i < n; i++)
         {
-            giveColor(path[i]);
+            giveColor(path[i], color);
         }
 
         return color.chromNum();
     }
 
+    /**
+     * shuffles the array
+     */
     private static void makeRandomPath(int arr[])
     {
         Random r = new Random();
@@ -95,6 +111,9 @@ public class Greedy {
         }
     }
 
+    /**
+     * returns smallest value of an int array
+     */
     private static int getMin(int[] a)
     {
 
@@ -111,4 +130,10 @@ public class Greedy {
         return min;
 
     }
+
+    public static int getChrom()
+    {
+        return chromNum;
+    }
+
 }

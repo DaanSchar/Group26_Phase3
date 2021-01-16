@@ -27,6 +27,11 @@ public class Check
         {
             if(color.getColor(e[i].u) == color.getColor(e[i].v))
             {
+                System.out.println(e[i].u + " = " + e[i].v);
+                return false;
+            }
+            if(color.getColor(e[i].u) == 0 || color.getColor(e[i].v) == 0)
+            {
                 return false;
             }
         }
