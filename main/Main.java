@@ -35,12 +35,11 @@ public class Main
         //IsolatedVertex.run();
         //UpperBound.run();
         //Greedy.run(Graph.getN());
-        //DSatur.run();
+        DSatur.run();
         //BackTracking.run();
-        //BackTrackingSortedDegrees.run();
-        //ImplicitEnumeration.run();
-        Brown.run();
-        //Ordering.run();
+        //BackTrackingBrown.run();
+        //ColoringDecision.run();
+
 
         Log.close();
     }

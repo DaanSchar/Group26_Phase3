@@ -62,8 +62,7 @@ public class DSatur {
 
 
     //step 1
-    public static void degreeSort()
-    {
+    public static void degreeSort() {
         //make array that stores the degrees of each vertex
         degrees = new int[n];
 
@@ -82,19 +81,10 @@ public class DSatur {
             }
         }
 
-        /*System.out.println("List of all vertices with their degrees");
-
-        for(int i = 0; i < degrees.length; i++)
-        {
-            System.out.println("Vertex: " + (i + 1) + " degree: " + degrees[i]);
-        }*/
-
-
         //calculate maximum degree
         int maxDegree = 0;
 
-        for(int i = 0; i < degrees.length; i++)
-        {
+        for(int i = 0; i < degrees.length; i++) {
             maxDegree = Math.max(maxDegree, degrees[i]);
         }
 
@@ -104,8 +94,7 @@ public class DSatur {
 
         int position = 0;
 
-        for(int i = maxDegree; i >= 0; i--)
-        {
+        for(int i = maxDegree; i >= 0; i--) {
             for(int j = 0; j < degrees.length; j++)
             {
                 if(degrees[j] == i)
@@ -116,48 +105,30 @@ public class DSatur {
             }
         }
 
-        /*System.out.println("Vertices arranged by decreasing order of degree");
-
-        for(int i = 0; i < sortedDegrees.length; i++)
-        {
-            System.out.println("Vertex: " + sortedDegrees[i] + " degree: " + degrees[sortedDegrees[i]-1]);
-        }*/
-
         maxDegreeVertex = sortedDegrees[0];
-
-        /*//loop through all vertices of sortedDegrees
-        for(int i = 0; i < sortedDegrees.length; i++)
-        {
-            //show connectedVertices
-            System.out.println("vertex: " + sortedDegrees[i] + " connected to :" + Arrays.toString(ConnectedVertices.get(sortedDegrees[i])));
-        }*/
 
     }
 
     //step 2
-    public static void firstColoring()
-    {
+    public static void firstColoring() {
         //colors = new int[n];
         color = new Color(n);
 
         color.setColor(maxDegreeVertex, 1);
 
-        //color.printColorList();
-
     }
 
     //step 3
-    public static int saturation()
-    {
+    public static int saturation() {
         int maxSaturation = 0;
 
         int [] saturationArray = new int[n];
 
         //loop through all vertices of sortedDegrees
-        for(int i = 0; i < sortedDegrees.length; i++)
-        {
-            if(color.getColor(sortedDegrees[i]) == 0)
-            {
+        for(int i = 0; i < sortedDegrees.length; i++) {
+
+            if(color.getColor(sortedDegrees[i]) == 0) {
+
                 int saturation = 0;
 
                 //get connected vertices
@@ -174,8 +145,8 @@ public class DSatur {
 
                 }
 
-                if(saturation > maxSaturation)
-                {
+                if(saturation > maxSaturation) {
+
                     maxSaturation = saturation;
                     maxSatVertex = sortedDegrees[i];
                 }
@@ -183,12 +154,10 @@ public class DSatur {
 
         }
 
-        //System.out.println("vertex " + maxSatVertex + " has maximal saturation: " + maxSaturation);
+        if(maxSaturation == 0) {
 
-        if(maxSaturation == 0)
-        {
-            for(int i = 0; i < sortedDegrees.length; i++)
-            {
+            for(int i = 0; i < sortedDegrees.length; i++) {
+
                 if(color.getColor(sortedDegrees[i]) == 0)
                 {
                     maxDegreeVertex = sortedDegrees[i];
@@ -205,31 +174,31 @@ public class DSatur {
     }
 
     //step 4
-    public static void condition()
-    {
-        if(color.allColored() == true)
-        {
+    public static void condition() {
+
+        if(color.allColored() == true) {
+
             //System.out.println("end");
             end();
         }
-        else
-        {
+        else {
             coloring();
         }
     }
 
-    public static void coloring()
-    {
+    public static void coloring() {
+
         int vertex = saturation();
 
-        color.setColor(vertex, 1);
+        color.setColorCheck(vertex, 1);
 
         condition();
     }
 
+
     //step 5
-    public static void end()
-    {
+    public static void end() {
+
         runtime = System.currentTimeMillis() - starttime;
 
         color.printColorList();

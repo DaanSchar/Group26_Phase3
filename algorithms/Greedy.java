@@ -6,6 +6,8 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -35,6 +37,8 @@ public class Greedy {
             colorGraph();
             chromNums[i] = color.chromNum();
         }
+
+        System.out.println(Arrays.toString(chromNums));
 
         System.out.println("Greedy:         Chromatic number:" + getMin(chromNums));
         System.out.println("Greedy:         Finished Running.");
