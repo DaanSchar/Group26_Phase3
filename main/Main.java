@@ -15,9 +15,9 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 4;
+        int graph = 6;
 
-        for(int i = graph; i < 5; i++)
+        for(int i = graph; i < 7; i++)
         {
             if(i != 15)
             {

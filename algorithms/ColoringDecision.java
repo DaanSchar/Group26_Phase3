@@ -1,5 +1,14 @@
 package algorithms;
 
+/**
+ * k-coloring decision problem:
+ * checks whether a graph is colorable with k colors
+ * by trying all possibilities the vertices
+ * if k is not possible, k is increased by 1
+ *
+ * @author Leo
+ */
+
 import color.Color;
 import graph.ColEdge;
 import graph.ConnectedVertices;
@@ -22,8 +31,12 @@ public class ColoringDecision {
 
     private static boolean found;
 
+    private static long startTime;
+    private static long runTime;
 
     public static void run() {
+
+        startTime = System.currentTimeMillis();
 
         Log.startTimer();
         System.out.println("ColoringDecision:         Running ColoringDecision...");
@@ -48,7 +61,6 @@ public class ColoringDecision {
             System.out.println("coloring with " + pc + " colors not possible.");
             System.out.println("set pc += 1");
 
-
             coloring(pc, v);
             pc++;
         }
@@ -64,53 +76,56 @@ public class ColoringDecision {
      */
     private static boolean coloring(int pc, int v) {
 
-        //base case - if all vertices are colored, a pc coloring has been found
-        if(v == n) {
+            //base case - if all vertices are colored, a pc coloring has been found
+            if (v == n) {
 
-            found = true;
-            return true;
+                found = true;
+                return true;
 
-        }
-        //try color v with a color < pc
-        for(int c = 1; c <= pc; c++) {
-
-            color.setColor(v, c);
-
-            //if coloring is allowed
-            if(check(v, c)) {
-
-                //recursive call forwards to v + 1
-                if(coloring(pc, (v+1))) {
-
-                    return true;
-                }
-                //if recursive call returns false, set v to 0 and go backwards
-                color.setColor(v, 0);
             }
-        }
+
+            //try color v with a color < pc
+            for (int c = 1; c <= pc; c++) {
+
+                color.setColor(v, c);
+
+                //if coloring is allowed
+                if (check(v, c)) {
+
+                    //recursive call forwards to v + 1
+                    if (coloring(pc, (v + 1))) {
+
+                        return true;
+                    }
+                    //if recursive call returns false, set v to 0 and go backwards
+                    color.setColor(v, 0);
+                }
+            }
 
         return false;
     }
 
-    /**
-     * checks whether coloring is allowed
-     * @param v vertex to be colored
-     * @param c color that is assigned
-     * @return false if coloring is not allowed
-     */
-    private static boolean check(int v, int c) {
+        /**
+         * checks whether coloring is allowed
+         * @param v vertex to be colored
+         * @param c color that is assigned
+         * @return false if coloring is not allowed
+         */
+        private static boolean check(int v, int c) {
 
-        int [] connVertices = ConnectedVertices.get(v);
+            int [] connVertices = ConnectedVertices.get(v);
 
-        for(int i = 0; i < connVertices.length; i++) {
+            for(int i = 0; i < connVertices.length; i++) {
 
-            if(color.getColor(v) != 0 && color.getColor(v) == color.getColor(connVertices[i])) {
+                if(color.getColor(v) != 0 && color.getColor(v) == color.getColor(connVertices[i])) {
 
-                return false;
+                    return false;
+                }
             }
+            return true;
+
         }
-        return true;
-    }
+
 
     private static void end() {
 
@@ -127,6 +142,18 @@ public class ColoringDecision {
     public static int getChrom()
     {
         return color.chromNum();
+    }
+
+    private static boolean timeOut() {
+
+        runTime = System.currentTimeMillis() - startTime;
+
+        if(runTime > 5000) {
+
+            return true;
+        }
+
+        return false;
     }
 
 }

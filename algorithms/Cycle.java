@@ -1,5 +1,12 @@
 package algorithms;
 
+/**
+ * checks whether a graph is a cycle by traversing from vertex to the next adjacent vertex
+ * if no vertices are visited twice before the starting vertex is reached the graph is cyclic
+ *
+ * @author Leo
+ */
+
 import graph.ColEdge;
 import graph.ConnectedVertices;
 import graph.Graph;
@@ -67,6 +74,12 @@ public class Cycle {
         }
     }
 
+    /**
+     * checks whether graph is cyclic by traversing all connections and checking whether a vertex has been visited
+     * already
+     * @param v
+     * @return
+     */
     private static boolean isCyclic(int v) {
 
         if (isSeen.size() == n) {
