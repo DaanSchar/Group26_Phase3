@@ -2,6 +2,8 @@ package algorithms;
 
 import graph.ColEdge;
 import graph.Graph;
+import logging.Log;
+
 import java.util.LinkedList;
 
 /**
@@ -209,6 +211,13 @@ public class TreeDetection {
      */
 
     public static boolean isTree() {
+        Log.startTimer();
+        System.out.println("TreeDetection:      Running...");
+        isConnected();
+        isAcyclic();
+        System.out.println("TreeDetection:      Finished running.");
+        Log.endTimer("Tree",(isConnected() && isAcyclic()));
+
         return isConnected() && isAcyclic();
     }
 

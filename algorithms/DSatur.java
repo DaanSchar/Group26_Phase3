@@ -190,30 +190,10 @@ public class DSatur {
 
         int vertex = saturation();
 
-        giveColor(vertex);
+        color.setColorCheck(vertex, 1);
 
         condition();
     }
-
-    private static void giveColor(int vertex)
-    {
-        int[] vertices = ConnectedVertices.get(vertex);
-
-        if(color.getColor(vertex) == 0)
-        {
-            color.setColor(vertex, 1);
-        }
-
-        for (int i = 0; i < vertices.length; i++)
-        {
-            if(color.getColor(vertex) == color.getColor(vertices[i]))
-            {
-                color.setColor(vertex, color.getColor(vertices[i]) + 1);
-                i = -1;
-            }
-        }
-    }
-
 
 
     //step 5

@@ -17,27 +17,16 @@ public class Main
 
         int graph = 1;
 
-        for(int i = graph; i < graph+1; i++)
+        for(int i = graph; i < 21; i++)
         {
-            if(i != 15)
-            {
-                // data setup
-                graphName = i + ".txt";
-                Graph.read(graphName);
-                ConnectedVertices.makeMatrix();
-                Log.init();
+            // data setup
+            graphName = i + ".txt";
+            Graph.read(graphName);
+            ConnectedVertices.makeMatrix();
 
-                // algorithms
-                Cycle.run();
-                LowerBound.get();
-                Greedy.run(Graph.getN());
-                OrderedGreedy.run();
-                LowerBoundGreedy.run();
-                DSatur.run();
-                Bipartite.run();
-
-                Log.close();
-            }
+            Log.init();
+            runProgram();
+            Log.close();
         }
 
     }
@@ -45,33 +34,22 @@ public class Main
 
     public static void runProgram()
     {
-
-        Log.init();
-
-        // Circle.run();
-        // if(!Circle.isCircle())
-        // {
-        if(!TreeDetection.isTree())
-        {
-            Bipartite.run();
-            if(!Bipartite.isBipartite())
-            {
-                Greedy.run(Graph.getM());
-                DSatur.run();
-                ImplicitEnumeration.run();
-                OrderedGreedy.run();
-                chromaticNumber = getBest();
-            } else {
-                chromaticNumber = 2;
-            }
-        } else {
-            chromaticNumber = 2;
-        }
-
-        System.out.println("The Chromatic number = " + chromaticNumber);
-
-        Log.close();
+        LowerBound.get();
+        Cycle.run();
+        TreeDetection.isTree();
+        Bipartite.run();
+        runColorMethods();
     }
+
+    public static void runColorMethods()
+    {
+        Greedy.run(Graph.getM());
+        DSatur.run();
+        OrderedGreedy.run();
+        LowerBoundGreedy.run();
+        chromaticNumber = getBest();
+    }
+
 
 
     public static int getBest()
@@ -79,8 +57,8 @@ public class Main
         int list[] = new int[4];
         list[0] = Greedy.getChrom();
         list[1] = DSatur.getChrom();
-        list[2] = ImplicitEnumeration.getChrom();
-        list[3] = OrderedGreedy.getChrom();
+        list[2] = OrderedGreedy.getChrom();
+        list[3] = LowerBoundGreedy.getChrom();
 
         int min = list[0];
 
