@@ -161,4 +161,10 @@ public class LowerBound
         }
     }
 
+    public static int getLowerBound() {
+
+        return maxSize;
+
+    }
+
 }

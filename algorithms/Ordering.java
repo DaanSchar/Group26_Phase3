@@ -28,7 +28,7 @@ public class Ordering {
 
     private static boolean go;
 
-    public static void run() {
+    public static int[] get() {
 
         n = Graph.getN();
         m = Graph.getM();
@@ -52,6 +52,18 @@ public class Ordering {
         go = true;
 
         sort(k);
+
+        int [] arr = new int[sortedGLF.size()];
+
+        //convert from ArrayList to array
+        for(int i = 0; i < sortedGLF.size(); i++) {
+
+            arr[i] = (Integer) sortedGLF.get(i);
+
+        }
+
+        return arr;
+
 
     }
 

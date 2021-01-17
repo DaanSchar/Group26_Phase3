@@ -31,12 +31,9 @@ public class ColoringDecision {
 
     private static boolean found;
 
-    private static long startTime;
-    private static long runTime;
 
     public static void run() {
 
-        startTime = System.currentTimeMillis();
 
         Log.startTimer();
         System.out.println("ColoringDecision:         Running ColoringDecision...");
@@ -47,7 +44,7 @@ public class ColoringDecision {
 
         color = new Color(n);
 
-        LOWERBOUND = LowerBound.get();
+        LOWERBOUND = LowerBound.getLowerBound();
         UPPERBOUND = UpperBound.getUpperBound();
 
         pc = LOWERBOUND;
@@ -58,7 +55,7 @@ public class ColoringDecision {
 
         while(!found) {
 
-            System.out.println("coloring with " + pc + " colors not possible.");
+            System.out.println("coloring with " + (pc - 1) + " colors not possible.");
             System.out.println("set pc += 1");
 
             coloring(pc, v);
@@ -76,8 +73,8 @@ public class ColoringDecision {
      */
     private static boolean coloring(int pc, int v) {
 
-            //base case - if all vertices are colored, a pc coloring has been found
-            if (v == n) {
+            //base case - if all vertices are colored, a pc coloring has been found (+1)
+            if (v == n + 1) {
 
                 found = true;
                 return true;
@@ -142,18 +139,6 @@ public class ColoringDecision {
     public static int getChrom()
     {
         return color.chromNum();
-    }
-
-    private static boolean timeOut() {
-
-        runTime = System.currentTimeMillis() - startTime;
-
-        if(runTime > 5000) {
-
-            return true;
-        }
-
-        return false;
     }
 
 }

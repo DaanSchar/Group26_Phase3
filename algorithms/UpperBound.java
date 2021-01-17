@@ -4,7 +4,6 @@ import graph.ColEdge;
 import graph.Graph;
 import logging.Log;
 
-import java.util.Arrays;
 
 /**
  * calculates the upper bound on the chromatic number
@@ -21,7 +20,7 @@ public class UpperBound {
     private static int ub;
 
 
-    public static void get() {
+    public static int get() {
 
         Log.startTimer();
         System.out.println("UpperBound:         Running UpperBound...");
@@ -30,8 +29,12 @@ public class UpperBound {
         m = Graph.getM();
         e = Graph.getE();
 
+        maxDegree = 0;
+
         calcMaxDegree();
         upperBound();
+
+        return ub;
 
     }
 
@@ -65,9 +68,6 @@ public class UpperBound {
                 }
             }
         }
-
-        System.out.println(Arrays.toString(degrees));
-
 
         //calculate maximum degree
         for (int i = 0; i < degrees.length; i++) {

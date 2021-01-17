@@ -15,26 +15,36 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 1;
+        int graph = 22;
 
-        for(int i = graph; i < 21; i++)
+        for(int i = graph; i < 23; i++)
         {
-            // data setup
-            graphName = i + ".txt";
-            Graph.read(graphName);
-            ConnectedVertices.makeMatrix();
+            if(i != 35) {
 
-            Log.init();
-            runProgram();
-            Log.close();
+                // data setup
+                graphName = i + ".txt";
+                Graph.read(graphName);
+                ConnectedVertices.makeMatrix();
+
+                Log.init();
+                //runProgram();
+                runColoring();
+                Log.close();
+            }
         }
 
     }
 
+    public static void runColoring() {
+
+        //ColoringDecision.run();
+        ColoringDecisionOrdered.run();
+    }
 
     public static void runProgram()
     {
         LowerBound.get();
+        UpperBound.get();
         Cycle.run();
         TreeDetection.isTree();
         Bipartite.run();

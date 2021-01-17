@@ -90,16 +90,12 @@ public class Cycle {
         //check connected vertices of v
         int[] connVertices = ConnectedVertices.get(v);
 
-        System.out.println("CHECKING v : " + v);
-
         //check whether one of the connections has been visited already
         for (int i = 0; i < connVertices.length; i++) {
 
             for (int j = 0; j < isSeen.size(); j++) {
 
                 if (connVertices[i] != prev && connVertices[i] != start && connVertices[i] == isSeen.get(j)) {
-
-                    System.out.println("CONNECTED : FALSE");
 
                     return false;
                 }
@@ -120,8 +116,6 @@ public class Cycle {
         isSeen.add(prev);
 
         v = next;
-
-        System.out.println("NOW CHECKING v : " + v);
 
         if (isCyclic(v)) {
 

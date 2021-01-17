@@ -45,7 +45,7 @@ public class BackTrackingBrown {
 
         color = new Color(n);
 
-        Ordering.run();
+        Ordering.get();
 
         order = Ordering.getOrdering(); //get order of vertices after pre-ordering
         System.out.println("THIS IS THE ORDERING: " + Arrays.toString(order));

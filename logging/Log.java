@@ -82,7 +82,7 @@ public class Log
         totalTime += (end-start);
 
         order += name;
-        order += "[" + (end-start)/1000+ " s]";
+        order += "[" + (end-start)+ " ms]";
         order += ",";
 
     }
@@ -93,7 +93,7 @@ public class Log
         totalTime += (end-start);
 
         order += name;
-        order += "[" + (end-start)/1000 + " s]";
+        order += "[" + (end-start) + " ms]";
         order += "[chrom: " + n + "]";
         order += ",";
 
@@ -106,7 +106,7 @@ public class Log
         totalTime += (end-start);
 
         order += name;
-        order += "[" + (end-start)/1000+ " s]";
+        order += "[" + (end-start) + " ms]";
         order += "[is: " + b + "]";
         order += ",";
 
