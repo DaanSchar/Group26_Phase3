@@ -68,3 +68,5 @@
 467,phase2/5.txt,93,92,0.021505376344086023,85 ms,Bipartite[0 s][is: true],
 468,phase2/5.txt,93,92,0.021505376344086023,824 ms,Bipartite[0 s][is: true],
 469,phase2/5.txt,93,92,0.021505376344086023,1198 ms,LowerBound[0 s][chrom: 2],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: true],
+470,phase2/5.txt,93,92,0.021505376344086023,1276 ms,LowerBound[0 s][chrom: 2],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: true],
+471,phase2/5.txt,93,92,0.021505376344086023,1140 ms,LowerBound[0 s][chrom: 2],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: true],

@@ -37,6 +37,7 @@ public class Main
      */
     public static void runProgram()
     {
+        // gets minimum required coloring.
         int lowerBound = LowerBound.get();
 
         if(lowerBound == 2) {
@@ -47,12 +48,17 @@ public class Main
                 chromaticNumber = 3;
             } else if (TreeDetection.isTree()) {
                 chromaticNumber = 2;
-            } else if (lowerBound == 1) {
-                chromaticNumber = 1;
+            } else if(Bipartite.isBipartite()) {
+                chromaticNumber = 2;
             } else {
                 runColorMethods();
-            }
+                }
+        } else if (lowerBound == 1) {
+            chromaticNumber = 1;
+        } else {
+            runColorMethods();
         }
+
         System.out.println("RESULT: " + chromaticNumber);
 
     }
@@ -93,7 +99,9 @@ public class Main
         return min;
     }
 
-
+    /**
+     * used in log class
+     */
     public static String getGraphName()
     {
         return graphName;

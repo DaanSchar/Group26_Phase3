@@ -71,7 +71,6 @@ public class Bipartite
         catch (BipartiteInvalidException e)
         {
             isBipartite = false;
-            System.out.println("Bipartite:          Exception.");
             return false;
         }
         isBipartite = false;
@@ -141,6 +140,7 @@ public class Bipartite
 
     public static boolean isBipartite()
     {
+        run();
         return isBipartite;
     }
 
