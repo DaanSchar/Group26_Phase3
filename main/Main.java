@@ -5,7 +5,10 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
-
+/**
+ * LowerBound algorithms are commented out, just so you can see that we included them and how to use them if
+ * you'd like to test them. they don't affect the final result, but only takes up unnecessary time.
+ */
 public class Main
 {
 
@@ -15,20 +18,15 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 5;
+        // data setup
+        graphName = args[0];
+        Graph.read(graphName);
+        ConnectedVertices.makeMatrix();
 
-        for(int i = graph; i < graph + 1; i++)
-        {
-            // data setup
-            graphName = "phase2/"+
-                    i + ".txt";
-            Graph.read(graphName);
-            ConnectedVertices.makeMatrix();
 
-            Log.init();
-            runProgram();
-            Log.close();
-        }
+        Log.init();
+        runProgram();
+        Log.close();
 
     }
 
@@ -38,26 +36,24 @@ public class Main
     public static void runProgram()
     {
         // gets minimum required coloring.
-        int lowerBound = LowerBound.get();
+        //LowerBound.get();
+        UpperBound.get();
 
-        if(lowerBound == 2) {
-            Cycle.run();
-            if (Cycle.getChromNum() == 2) {
-                chromaticNumber = 2;
-            } else if (Cycle.getChromNum() == 3) {
-                chromaticNumber = 3;
-            } else if (TreeDetection.isTree()) {
-                chromaticNumber = 2;
-            } else if(Bipartite.isBipartite()) {
-                chromaticNumber = 2;
-            } else {
-                runColorMethods();
-                }
-        } else if (lowerBound == 1) {
-            chromaticNumber = 1;
+        Cycle.run();
+        int cycle = Cycle.getChromNum();
+
+        if (cycle == 2) {
+            chromaticNumber = 2;
+        } else if (cycle == 3) {
+            chromaticNumber = 3;
+        } else if (TreeDetection.isTree()) {
+            chromaticNumber = 2;
+        } else if(Bipartite.isBipartite()) {
+            chromaticNumber = 2;
         } else {
             runColorMethods();
         }
+
 
         System.out.println("RESULT: " + chromaticNumber);
 
@@ -71,7 +67,7 @@ public class Main
         Greedy.run(Graph.getM());
         DSatur.run();
         OrderedGreedy.run();
-        LowerBoundGreedy.run();
+        //LowerBoundGreedy.run();
         chromaticNumber = getBest();
     }
 
@@ -81,11 +77,11 @@ public class Main
      */
     public static int getBest()
     {
-        int list[] = new int[4];
+        int list[] = new int[3];
         list[0] = Greedy.getChrom();
         list[1] = DSatur.getChrom();
         list[2] = OrderedGreedy.getChrom();
-        list[3] = LowerBoundGreedy.getChrom();
+        //list[3] = LowerBoundGreedy.getChrom();
 
         int min = list[0];
 
