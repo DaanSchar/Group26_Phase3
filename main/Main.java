@@ -15,12 +15,13 @@ public class Main
     public static void main(String[] args)
     {
 
-        int graph = 1;
+        int graph = 5;
 
-        for(int i = graph; i < 21; i++)
+        for(int i = graph; i < graph + 1; i++)
         {
             // data setup
-            graphName = i + ".txt";
+            graphName = "phase2/"+
+                    i + ".txt";
             Graph.read(graphName);
             ConnectedVertices.makeMatrix();
 
@@ -31,16 +32,34 @@ public class Main
 
     }
 
-
+    /**
+     * decision tree.
+     */
     public static void runProgram()
     {
-        LowerBound.get();
-        Cycle.run();
-        TreeDetection.isTree();
-        Bipartite.run();
-        runColorMethods();
+        int lowerBound = LowerBound.get();
+
+        if(lowerBound == 2) {
+            Cycle.run();
+            if (Cycle.getChromNum() == 2) {
+                chromaticNumber = 2;
+            } else if (Cycle.getChromNum() == 3) {
+                chromaticNumber = 3;
+            } else if (TreeDetection.isTree()) {
+                chromaticNumber = 2;
+            } else if (lowerBound == 1) {
+                chromaticNumber = 1;
+            } else {
+                runColorMethods();
+            }
+        }
+        System.out.println("RESULT: " + chromaticNumber);
+
     }
 
+    /**
+     * runs the coloring algorithms
+     */
     public static void runColorMethods()
     {
         Greedy.run(Graph.getM());
@@ -51,7 +70,9 @@ public class Main
     }
 
 
-
+    /**
+     * returns the smallest coloring of the coloring algorithms
+     */
     public static int getBest()
     {
         int list[] = new int[4];
@@ -64,8 +85,6 @@ public class Main
 
         for(int i = 0; i < list.length; i++)
         {
-            System.out.println("possible chromatic number: " + list[i]);
-
             if (list[i] < min)
             {
                 min = list[i];
