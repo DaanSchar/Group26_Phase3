@@ -28,7 +28,7 @@ public class Bipartite
 
     private static boolean isBipartite;
 
-    private static boolean bipartite(int start)
+    private static void run(int start)
     {
 
         n = Graph.getN();
@@ -64,37 +64,24 @@ public class Bipartite
                     System.out.println("Bipartite:          Graph is Bipartite.");
                     System.out.println("Bipartite:          Finished running.");
                     Log.endTimer("Bipartite", true);
-                    return true;
+                    return;
                 }
             }
         }
         catch (BipartiteInvalidException e)
         {
             isBipartite = false;
-            return false;
+            System.out.println("Bipartite:          Graph cannot be colored with 2 colors");
+            System.out.println("Bipartite:          Finished running.");
+            Log.endTimer("Bipartite", false);
+            return;
         }
         isBipartite = false;
-        return false;
-    }
-
-    public static void run()
-    {
-        Log.startTimer();
-        System.out.println("Bipartite:          Running...");
-
-        n = Graph.getN();
-
-        for(int i = 0; i < n; i++)
-        {
-            if(bipartite(i+1))
-            {
-                return;
-            }
-        }
         System.out.println("Bipartite:          Graph cannot be colored with 2 colors");
         System.out.println("Bipartite:          Finished running.");
         Log.endTimer("Bipartite", false);
     }
+
 
     /**
      * sets the colors of the adjacent vertices of the input vertex to the negated color
@@ -140,7 +127,7 @@ public class Bipartite
 
     public static boolean isBipartite()
     {
-        run();
+        run(1);
         return isBipartite;
     }
 

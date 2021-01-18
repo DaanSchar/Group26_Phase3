@@ -5,10 +5,7 @@ import graph.ConnectedVertices;
 import graph.Graph;
 import logging.Log;
 
-/**
- * LowerBound algorithms are commented out, just so you can see that we included them and how to use them if
- * you'd like to test them. they don't affect the final result, but only takes up unnecessary time.
- */
+
 public class Main
 {
 
@@ -36,8 +33,8 @@ public class Main
     public static void runProgram()
     {
         // gets minimum required coloring.
-        //LowerBound.get();
-        UpperBound.get();
+        System.out.println("NEW BEST LOWER BOUND = " + LowerBound.get());
+        System.out.println("NEW BEST UPPER BOUND = " + UpperBound.get());
 
         Cycle.run();
         int cycle = Cycle.getChromNum();
@@ -55,7 +52,7 @@ public class Main
         }
 
 
-        System.out.println("RESULT: " + chromaticNumber);
+        System.out.println("CHROMATIC NUMBER = " + chromaticNumber);
 
     }
 
@@ -67,7 +64,7 @@ public class Main
         Greedy.run(Graph.getM());
         DSatur.run();
         OrderedGreedy.run();
-        //LowerBoundGreedy.run();
+        LowerBoundGreedy.run();
         chromaticNumber = getBest();
     }
 
@@ -77,11 +74,11 @@ public class Main
      */
     public static int getBest()
     {
-        int list[] = new int[3];
+        int list[] = new int[4];
         list[0] = Greedy.getChrom();
         list[1] = DSatur.getChrom();
         list[2] = OrderedGreedy.getChrom();
-        //list[3] = LowerBoundGreedy.getChrom();
+        list[3] = LowerBoundGreedy.getChrom();
 
         int min = list[0];
 

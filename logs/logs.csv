@@ -1,0 +1,2 @@
+"Run","Graph","Vertices","Edges","Density","Total Time","Order",
+1,example_graphs2/4.txt,11,16,0.2909090909090909,84 ms,LowerBound[0 s][chrom: 2],UpperBound[0 s][chrom: 4],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: false],Greedy[0 s][chrom: 3],DSatur[0 s][chrom: 3],OrderedGreedy[0 s][chrom: 3],LowerBoundGreedy[0 s][chrom: 3],
