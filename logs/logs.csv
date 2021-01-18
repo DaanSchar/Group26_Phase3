@@ -1,2 +1,7 @@
 "Run","Graph","Vertices","Edges","Density","Total Time","Order",
 1,example_graphs2/4.txt,11,16,0.2909090909090909,84 ms,LowerBound[0 s][chrom: 2],UpperBound[0 s][chrom: 4],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: false],Greedy[0 s][chrom: 3],DSatur[0 s][chrom: 3],OrderedGreedy[0 s][chrom: 3],LowerBoundGreedy[0 s][chrom: 3],
+2,example_graphs2/13.txt,61,448,0.2448087431693989,341 ms,LowerBound[0 s][chrom: 2],UpperBound[0 s][chrom: 21],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: true],
+3,example_graphs2/13.txt,61,448,0.2448087431693989,340 ms,LowerBound[0 s][chrom: 2],UpperBound[0 s][chrom: 21],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: true],
+4,example_graphs2/13.txt,61,448,0.2448087431693989,322 ms,LowerBound[0 s][chrom: 2],UpperBound[0 s][chrom: 21],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: true],
+5,example_graphs2/14.txt,31,385,0.8279569892473119,901 ms,LowerBound[0 s][chrom: 15],UpperBound[0 s][chrom: 29],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: false],Greedy[0 s][chrom: 16],DSatur[0 s][chrom: 16],OrderedGreedy[0 s][chrom: 16],LowerBoundGreedy[0 s][chrom: 16],
+6,example_graphs2/14.txt,31,385,0.8279569892473119,927 ms,LowerBound[0 s][chrom: 15],UpperBound[0 s][chrom: 29],Cycle[0 s][is: false],Tree[0 s][is: false],Bipartite[0 s][is: false],Greedy[0 s][chrom: 16],DSatur[0 s][chrom: 16],OrderedGreedy[0 s][chrom: 16],LowerBoundGreedy[0 s][chrom: 16],

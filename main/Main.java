@@ -33,8 +33,9 @@ public class Main
     public static void runProgram()
     {
         // gets minimum required coloring.
-        System.out.println("NEW BEST LOWER BOUND = " + LowerBound.get());
-        System.out.println("NEW BEST UPPER BOUND = " + UpperBound.get());
+        int lowerBound = LowerBound.get();
+        int upperBound = UpperBound.get();
+        System.out.println("NEW BEST LOWER BOUND = " + lowerBound);
 
         Cycle.run();
         int cycle = Cycle.getChromNum();
@@ -43,15 +44,18 @@ public class Main
             chromaticNumber = 2;
         } else if (cycle == 3) {
             chromaticNumber = 3;
+            System.out.println("NEW BEST UPPER BOUND = " + (upperBound+1));
         } else if (TreeDetection.isTree()) {
             chromaticNumber = 2;
         } else if(Bipartite.isBipartite()) {
             chromaticNumber = 2;
+        } else if (lowerBound == Graph.getN()){
+                chromaticNumber = lowerBound;
         } else {
             runColorMethods();
         }
 
-
+        System.out.println("NEW BEST UPPER BOUND = " + upperBound);
         System.out.println("CHROMATIC NUMBER = " + chromaticNumber);
 
     }
